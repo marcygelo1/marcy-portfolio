@@ -1,35 +1,130 @@
-.header {
-    background: linear-gradient(to right, #667eea, #764ba2);
-    padding: 20px;
-    text-align: center;
-    color: white;
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+  background-size: 300% 300%;
+  animation: bgMove 10s ease infinite;
+  color: #e2e8f0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
 }
 
-section {
-    padding: 50px;
-    margin: 20px 0;
+/* BACKGROUND ANIMATION */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.project {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    background: white;
+/* MAIN CARD */
+.profile-card {
+  background: rgba(0,0,0,0.7);
+  border: 1px solid #00f0ff;
+  box-shadow: 0 0 25px #00f0ff;
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 700px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.footer {
-    background: #667eea;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+/* PROFILE IMAGE */
+.profile-box {
+  width: 180px;
+  height: 180px;
+  border: 2px dashed #00f0ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 15px;
 }
 
-@media (max-width: 600px) {
-    .header, section, .footer {
-        padding: 15px;
-    }
+.profile-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
 }
+
+.profile-box.has-img img { display: block; }
+.profile-box.has-img span { display: none; }
+
+/* NAME */
+.title {
+  font-size: 26px;
+  margin-bottom: 5px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #00f0ff; }
+  to { text-shadow: 0 0 25px #ff00ff; }
+}
+
+/* SECTIONS */
+.box {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(0, 240, 255, 0.1);
+  border-radius: 10px;
+
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* HEADINGS */
+.box h3 {
+  margin-bottom: 10px;
+}
+
+/* BUTTON */
+.upload-btn {
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  border: none;
+  background: #00f0ff;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .profile-box {
+    width: 150px;
+    height: 150px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .box {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 15px;
+  }
+
+  .profile-box {
+    width: 130px;
+    height: 130px;
+  }
+}
+</style>
