@@ -3,49 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcy Angelo M. Villegas | Frontend Developer</title>
+  <title>Portfolio</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1a0033, #0f172a);
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+      background-size: 300% 300%;
+      animation: bgMove 10s ease infinite;
       color: #e2e8f0;
       text-align: center;
-      overflow-x: hidden;
     }
 
-    /* floating hearts */
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: #ff4da6;
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.7;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 0.7; }
-      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {
       padding: 20px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(10px);
-    }
-
-    header h1 {
-      color: #ff4da6;
-      animation: glowText 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #ff4da6; }
-      to { text-shadow: 0 0 25px #ff4da6, 0 0 40px #ff4da6; }
+      justify-content: flex-end;
+      background: rgba(0,0,0,0.7);
     }
 
     nav a {
@@ -60,66 +40,58 @@
 
     .profile-card {
       background: rgba(0,0,0,0.6);
-      border: 1px solid #ff4da6;
-      box-shadow: 0 0 20px #ff4da6;
+      border: 1px solid #00f0ff;
+      box-shadow: 0 0 25px #00f0ff;
       padding: 30px;
       border-radius: 20px;
       max-width: 600px;
       margin: auto;
-      animation: fadeIn 1.5s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .profile-box {
+      width: 180px;
+      height: 180px;
+      margin: auto;
+      border: 2px dashed #00f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00f0ff;
+      margin-bottom: 20px;
     }
 
-    .profile-card img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 3px solid #ff4da6;
-      margin-bottom: 15px;
-      animation: pulse 2s infinite;
+    .profile-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px #ff4da6; }
-      50% { box-shadow: 0 0 30px #ff4da6; }
-      100% { box-shadow: 0 0 10px #ff4da6; }
+    .profile-box.has-img img {
+      display: block;
+    }
+
+    .profile-box.has-img span {
+      display: none;
     }
 
     .box {
       margin-top: 20px;
       padding: 15px;
-      background: rgba(255, 77, 166, 0.1);
+      background: rgba(0, 240, 255, 0.1);
       border-radius: 10px;
-      transition: 0.3s;
-    }
-
-    .box:hover {
-      box-shadow: 0 0 15px #ff4da6;
-      transform: scale(1.02);
     }
 
     footer {
       margin-top: 40px;
       padding: 20px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.7);
     }
   </style>
 </head>
 <body>
 
-<!-- floating hearts -->
-<div class="heart" style="left:10%">❤</div>
-<div class="heart" style="left:30%; animation-delay:2s">❤</div>
-<div class="heart" style="left:50%; animation-delay:4s">❤</div>
-<div class="heart" style="left:70%; animation-delay:1s">❤</div>
-<div class="heart" style="left:90%; animation-delay:3s">❤</div>
-
 <header>
-  <h1>Marcy Angelo M. Villegas</h1>
   <nav>
     <a href="#">About</a>
     <a href="#">Contact</a>
@@ -128,7 +100,13 @@
 
 <div class="container">
   <div class="profile-card">
-    <img src="profile.jpg" alt="Profile Picture">
+
+    <!-- Square Profile Placeholder -->
+    <div class="profile-box">
+      <span>Add a Photo</span>
+      <img src="profile.jpg" alt="Profile">
+    </div>
+
     <h2>Marcy Angelo M. Villegas</h2>
     <p>Frontend Developer</p>
 
@@ -164,6 +142,14 @@
 <footer>
   <p>© 2026 Marcy Angelo M. Villegas</p>
 </footer>
+
+<script>
+  // auto show image if exists
+  const img = document.querySelector('.profile-box img');
+  img.onload = () => {
+    img.parentElement.classList.add('has-img');
+  };
+</script>
 
 </body>
 </html>
