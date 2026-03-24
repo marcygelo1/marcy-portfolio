@@ -15,9 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             background: 
-                linear-gradient(135deg, rgba(10, 10, 30, 0.9) 0%, rgba(30, 10, 40, 0.9) 50%, rgba(10, 20, 50, 0.9) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="none" stroke="%23ff00ff" stroke-width="0.5" opacity="0.3"/><line x1="0" y1="0" x2="100" y2="100" stroke="%2300ffff" stroke-width="0.5" opacity="0.2"/></svg>');
-            background-size: cover, 100px 100px;
+                linear-gradient(135deg, #0a0e27 0%, #1a1f3d 50%, #0d1421 100%);
             min-height: 100vh;
             padding: 40px 20px;
             position: relative;
@@ -33,18 +31,18 @@
             width: 100%;
             height: 100%;
             background: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 0, 255, 0.03) 2px, rgba(255, 0, 255, 0.03) 4px);
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.03) 2px, rgba(0, 212, 255, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 215, 0, 0.02) 2px, rgba(255, 215, 0, 0.02) 4px);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Glowing Orbs */
+        /* Glowing Orbs - Masculine Tones */
         .orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.4;
+            opacity: 0.3;
             z-index: 0;
             animation: float 20s infinite ease-in-out;
         }
@@ -52,7 +50,7 @@
         .orb-1 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #ff00ff 0%, transparent 70%);
+            background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
             top: -100px;
             right: -100px;
             animation-delay: 0s;
@@ -61,7 +59,7 @@
         .orb-2 {
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+            background: radial-gradient(circle, #ffd700 0%, transparent 70%);
             bottom: -50px;
             left: -50px;
             animation-delay: -5s;
@@ -70,7 +68,7 @@
         .orb-3 {
             width: 250px;
             height: 250px;
-            background: radial-gradient(circle, #ff1493 0%, transparent 70%);
+            background: radial-gradient(circle, #00ff88 0%, transparent 70%);
             top: 50%;
             left: 50%;
             animation-delay: -10s;
@@ -94,48 +92,48 @@
             z-index: 2;
         }
 
-        /* Photo Box - Wedding Style */
+        /* Photo Box - Dark Elegant */
         .photo-box {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(20, 25, 50, 0.95);
             border-radius: 20px;
             padding: 35px;
             box-shadow: 
-                0 0 30px rgba(255, 0, 255, 0.3),
-                0 0 60px rgba(0, 255, 255, 0.2),
-                inset 0 0 20px rgba(255, 255, 255, 0.5);
+                0 0 30px rgba(0, 212, 255, 0.2),
+                0 0 60px rgba(255, 215, 0, 0.1),
+                inset 0 0 20px rgba(0, 212, 255, 0.05);
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
             position: relative;
             overflow: hidden;
         }
 
         .photo-box::before {
-            content: '✦';
+            content: '◆';
             position: absolute;
             top: 10px;
             left: 15px;
-            color: #ff00ff;
-            font-size: 1.5rem;
+            color: #00d4ff;
+            font-size: 1.2rem;
             opacity: 0.6;
-            animation: sparkle 3s infinite;
+            animation: pulse 3s infinite;
         }
 
         .photo-box::after {
-            content: '✦';
+            content: '◆';
             position: absolute;
             top: 10px;
             right: 15px;
-            color: #00ffff;
-            font-size: 1.5rem;
+            color: #ffd700;
+            font-size: 1.2rem;
             opacity: 0.6;
-            animation: sparkle 3s infinite 1.5s;
+            animation: pulse 3s infinite 1.5s;
         }
 
-        @keyframes sparkle {
+        @keyframes pulse {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
         }
@@ -143,14 +141,14 @@
         .photo-placeholder {
             width: 200px;
             height: 200px;
-            background: linear-gradient(135deg, #ffeef8 0%, #e8f8ff 50%, #ffe8f0 100%);
+            background: linear-gradient(135deg, #1a1f3d 0%, #0f1525 50%, #1a2332 100%);
             border: 3px dashed;
-            border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ff1493, #ff00ff) 1;
+            border-image: linear-gradient(45deg, #00d4ff, #ffd700, #00ff88, #00d4ff) 1;
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+            color: #8899a6;
             font-size: 1.1rem;
             font-weight: 500;
             cursor: pointer;
@@ -160,9 +158,9 @@
         }
 
         .photo-placeholder:hover {
-            background: linear-gradient(135deg, #ffe0f0 0%, #d0f0ff 50%, #ffd0e0 100%);
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+            background: linear-gradient(135deg, #1e2540 0%, #131b2b 50%, #1e2838 100%);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
 
         .photo-placeholder input[type="file"] {
@@ -174,19 +172,19 @@
         }
 
         .upload-btn {
-            background: linear-gradient(45deg, #ff00ff, #ff1493, #00ffff);
+            background: linear-gradient(45deg, #00d4ff, #0099cc, #ffd700);
             background-size: 200% 200%;
-            color: white;
+            color: #0a0e27;
             border: none;
             padding: 14px 35px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-weight: 700;
+            letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(255, 0, 255, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
             position: relative;
             overflow: hidden;
             animation: gradientShift 3s ease infinite;
@@ -200,25 +198,25 @@
 
         .upload-btn:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
         }
 
         .upload-btn::before {
-            content: '♥';
+            content: '▲';
             margin-right: 8px;
         }
 
-        /* Box Style for All Sections - Wedding Glassmorphism */
+        /* Box Style for All Sections - Dark Glassmorphism */
         .box {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(20, 25, 50, 0.9);
             border-radius: 20px;
             padding: 35px;
             box-shadow: 
-                0 8px 32px rgba(255, 0, 255, 0.2),
-                0 0 20px rgba(0, 255, 255, 0.1);
+                0 8px 32px rgba(0, 212, 255, 0.15),
+                0 0 20px rgba(255, 215, 0, 0.1);
             text-align: center;
             transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -231,7 +229,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
             transition: left 0.7s;
         }
 
@@ -242,19 +240,20 @@
         .box:hover {
             transform: translateY(-8px);
             box-shadow: 
-                0 15px 40px rgba(255, 0, 255, 0.3),
-                0 0 30px rgba(0, 255, 255, 0.2);
+                0 15px 40px rgba(0, 212, 255, 0.25),
+                0 0 30px rgba(255, 215, 0, 0.15);
+            border-color: rgba(0, 212, 255, 0.4);
         }
 
-        /* Header Box - Cyber Wedding */
+        /* Header Box - Dark Cyan Gold */
         .header-box {
-            background: linear-gradient(135deg, rgba(255, 0, 255, 0.9) 0%, rgba(255, 20, 147, 0.9) 50%, rgba(0, 255, 255, 0.9) 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.9) 0%, rgba(0, 153, 204, 0.9) 50%, rgba(255, 215, 0, 0.8) 100%);
+            color: #0a0e27;
             position: relative;
         }
 
         .header-box::after {
-            content: '∞';
+            content: '◈';
             position: absolute;
             bottom: 10px;
             right: 20px;
@@ -265,7 +264,7 @@
         .header-box h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
             font-weight: 700;
             letter-spacing: 1px;
         }
@@ -273,13 +272,13 @@
         .header-box p {
             font-size: 1.3rem;
             opacity: 0.95;
-            font-weight: 300;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         /* Content Boxes */
         .content-box h2 {
-            color: #ff1493;
+            color: #00d4ff;
             margin-bottom: 20px;
             font-size: 1.6rem;
             position: relative;
@@ -298,13 +297,13 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #ff1493);
+            background: linear-gradient(90deg, #00d4ff, #ffd700, #00ff88);
             border-radius: 2px;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         .content-box p {
-            color: #444;
+            color: #b8c5d6;
             line-height: 1.9;
             font-size: 1.05rem;
         }
@@ -319,25 +318,26 @@
         }
 
         .content-box ul li {
-            background: linear-gradient(135deg, #ff00ff 0%, #ff1493 100%);
-            color: white;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #0a0e27;
             padding: 10px 25px;
             border-radius: 25px;
             font-size: 0.95rem;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.3);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
             transition: all 0.3s ease;
             cursor: default;
         }
 
         .content-box ul li:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 0, 255, 0.5);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
         }
 
         /* Contact Links */
         .content-box a {
-            color: #ff1493;
+            color: #ffd700;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -351,12 +351,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            background: linear-gradient(90deg, #00d4ff, #ffd700);
             transition: width 0.3s ease;
         }
 
         .content-box a:hover {
-            color: #ff00ff;
+            color: #00d4ff;
         }
 
         .content-box a:hover::after {
@@ -365,32 +365,33 @@
 
         /* Footer Box */
         .footer-box {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.9) 0%, rgba(255, 0, 255, 0.9) 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(0, 100, 100, 0.9) 0%, rgba(0, 212, 255, 0.9) 100%);
+            color: #0a0e27;
             padding: 25px;
             position: relative;
         }
 
         .footer-box::before {
-            content: '♥';
+            content: '◆';
             position: absolute;
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             opacity: 0.5;
-            animation: heartbeat 2s infinite;
+            animation: rotate 4s infinite linear;
         }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.2); }
+        @keyframes rotate {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
         }
 
         .footer-box p {
             font-size: 0.95rem;
             opacity: 0.95;
             margin-top: 10px;
+            font-weight: 500;
         }
 
         /* Responsive */
