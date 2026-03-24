@@ -19,28 +19,148 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3d 50%, #0d1421 100%);
+            background: #050510;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
-        /* Grid Overlay */
-        body::before {
-            content: '';
+        /* Animated Background Layers */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.03) 2px, rgba(0, 212, 255, 0.03) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 215, 0, 0.02) 2px, rgba(255, 215, 0, 0.02) 4px);
-            pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
 
-        /* Container */
+        /* Layer 1: Flowing Gradient Mesh */
+        .gradient-mesh {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 136, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.2) 0%, transparent 40%);
+            animation: meshMove 20s ease-in-out infinite;
+        }
+
+        @keyframes meshMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(5%, 5%) rotate(5deg); }
+            50% { transform: translate(-5%, 10%) rotate(-5deg); }
+            75% { transform: translate(10%, -5%) rotate(3deg); }
+        }
+
+        /* Layer 2: Moving Scanlines */
+        .scanlines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 212, 255, 0.03) 2px,
+                rgba(0, 212, 255, 0.03) 4px
+            );
+            animation: scanlineMove 8s linear infinite;
+        }
+
+        @keyframes scanlineMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        /* Layer 3: Animated Grid */
+        .grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center top;
+            animation: gridMove 15s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Layer 4: Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00d4ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00d4ff;
+            animation: floatUp linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 2s; background: #ff0080; box-shadow: 0 0 10px #ff0080; }
+        .particle:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-duration: 18s; animation-delay: 1s; background: #ffd700; box-shadow: 0 0 10px #ffd700; }
+        .particle:nth-child(5) { left: 50%; animation-duration: 14s; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 5s; background: #00ff88; box-shadow: 0 0 10px #00ff88; }
+        .particle:nth-child(7) { left: 70%; animation-duration: 16s; animation-delay: 2s; }
+        .particle:nth-child(8) { left: 80%; animation-duration: 13s; animation-delay: 4s; background: #ff0080; box-shadow: 0 0 10px #ff0080; }
+        .particle:nth-child(9) { left: 90%; animation-duration: 17s; animation-delay: 1s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Layer 5: Neon Lines */
+        .neon-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .neon-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            animation: neonMove linear infinite;
+            opacity: 0.6;
+        }
+
+        .neon-line:nth-child(1) { top: 20%; width: 30%; animation-duration: 8s; }
+        .neon-line:nth-child(2) { top: 40%; width: 50%; animation-duration: 12s; animation-delay: 3s; background: linear-gradient(90deg, transparent, #ff0080, transparent); }
+        .neon-line:nth-child(3) { top: 60%; width: 40%; animation-duration: 10s; animation-delay: 5s; background: linear-gradient(90deg, transparent, #ffd700, transparent); }
+        .neon-line:nth-child(4) { top: 80%; width: 35%; animation-duration: 9s; animation-delay: 2s; }
+
+        @keyframes neonMove {
+            0% { left: -50%; opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Main Container */
         .container {
             width: 90vw;
             height: 90vh;
@@ -49,7 +169,7 @@
             grid-template-rows: 1fr auto;
             gap: 30px;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         /* Left Content */
@@ -61,45 +181,40 @@
         }
 
         .box {
-            background: rgba(20, 25, 50, 0.9);
+            background: rgba(10, 15, 30, 0.85);
             border-radius: 15px;
             padding: 25px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 
+                0 0 20px rgba(0, 212, 255, 0.2),
+                inset 0 0 20px rgba(0, 212, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .box:hover {
+            border-color: rgba(0, 255, 136, 0.5);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 136, 0.3),
+                inset 0 0 20px rgba(0, 255, 136, 0.1);
         }
 
         .box h2 {
             color: #00d4ff;
             font-size: 1.2rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-bottom: 2px solid #ffd700;
+            border-bottom: 2px solid #00ff88;
             padding-bottom: 8px;
             display: inline-block;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         .box p {
-            color: #b8c5d6;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .box ul {
-            list-style: none;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .box ul li {
-            background: #00d4ff;
-            color: #0a0e27;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            color: #c0d0e0;
+            font-size: 0.92rem;
+            line-height: 1.7;
         }
 
         /* Right Side - Photo & Name */
@@ -108,13 +223,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         .photo-box {
             width: 250px;
             height: 250px;
-            background: linear-gradient(135deg, #1a1f3d 0%, #0f1525 100%);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%);
             border: 2px solid #00d4ff;
             border-radius: 15px;
             display: flex;
@@ -122,12 +237,16 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            box-shadow: 
+                0 0 30px rgba(0, 212, 255, 0.4),
+                inset 0 0 30px rgba(0, 212, 255, 0.1);
             cursor: pointer;
+            animation: borderPulse 3s ease-in-out infinite;
         }
 
-        .photo-box:hover {
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+        @keyframes borderPulse {
+            0%, 100% { border-color: #00d4ff; box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); }
+            50% { border-color: #00ff88; box-shadow: 0 0 40px rgba(0, 255, 136, 0.5); }
         }
 
         .photo-placeholder {
@@ -145,20 +264,32 @@
 
         .name-box {
             text-align: center;
+            padding: 20px;
+            background: rgba(10, 15, 30, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
         .name-box h1 {
             color: #ffd700;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 215, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.5); }
         }
 
         .name-box p {
-            color: #00d4ff;
-            font-size: 1rem;
+            color: #00ff88;
+            font-size: 0.95rem;
             letter-spacing: 3px;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         /* Footer */
@@ -168,17 +299,22 @@
             color: #8899a6;
             font-size: 0.85rem;
             padding: 15px;
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            background: rgba(10, 15, 30, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
         .footer a {
             color: #00d4ff;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .footer a:hover {
             color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         /* Responsive */
@@ -201,12 +337,36 @@
             }
             
             .name-box h1 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="gradient-mesh"></div>
+        <div class="scanlines"></div>
+        <div class="grid"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="neon-lines">
+            <div class="neon-line"></div>
+            <div class="neon-line"></div>
+            <div class="neon-line"></div>
+            <div class="neon-line"></div>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Left Side - Content -->
         <div class="left-content">
@@ -241,8 +401,8 @@
 
         <!-- Footer -->
         <div class="footer">
-            <a href="mailto:mmamvillegas@tip.edu.ph">Email</a> |
-            <a href="https://github.com/marcygelo1/portfolio" target="_blank">GitHub</a> |
+            <a href="mailto:mmamvillegas@tip.edu.ph">Email</a>
+            <a href="https://github.com/marcygelo1/portfolio" target="_blank">GitHub</a>
             <span>© 2026 Marcy Angelo M. Villegas</span>
         </div>
     </div>
@@ -253,7 +413,7 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const box = document.querySelector('.photo-box');
-                    box.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                    box.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 13px;">`;
                 };
                 reader.readAsDataURL(input.files[0]);
             }
