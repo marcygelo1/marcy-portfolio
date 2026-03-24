@@ -1,130 +1,40 @@
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
-  background-size: 300% 300%;
-  animation: bgMove 10s ease infinite;
-  color: #e2e8f0;
+<div class="profile-card">
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  text-align: center;
-}
+  <div class="profile-box" onclick="document.getElementById('fileInput').click()">
+    <span>Add a Photo</span>
+    <img id="preview">
+  </div>
 
-/* BACKGROUND ANIMATION */
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  <input type="file" id="fileInput" accept="image/*" hidden>
 
-/* MAIN CARD */
-.profile-card {
-  background: rgba(0,0,0,0.7);
-  border: 1px solid #00f0ff;
-  box-shadow: 0 0 25px #00f0ff;
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 700px;
+  <button class="upload-btn">Upload Photo</button>
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  <!-- YOUR NAME (CENTERED) -->
+  <h2 class="title">Marcy Angelo M. Villegas</h2>
 
-/* PROFILE IMAGE */
-.profile-box {
-  width: 180px;
-  height: 180px;
-  border: 2px dashed #00f0ff;
+  <p>Frontend Developer</p>
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  <!-- WHO I AM -->
+  <div class="box">
+    <h3>Who I Am</h3>
+    <p>
+      I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences.
+    </p>
+  </div>
 
-  cursor: pointer;
-  overflow: hidden;
-  margin-bottom: 15px;
-}
+  <!-- STRENGTHS -->
+  <div class="box">
+    <h3>Strengths</h3>
+    <p>
+      I am a detail-oriented and adaptable individual with strong problem-solving skills and a passion for learning.
+    </p>
+  </div>
 
-.profile-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
-}
+  <!-- CONTACT -->
+  <div class="box">
+    <h3>Contact</h3>
+    <p>Email: mmamvillegas@tip.edu.ph</p>
+    <p>GitHub: github.com/marcygelo1/portfolio</p>
+  </div>
 
-.profile-box.has-img img { display: block; }
-.profile-box.has-img span { display: none; }
-
-/* NAME */
-.title {
-  font-size: 26px;
-  margin-bottom: 5px;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #00f0ff; }
-  to { text-shadow: 0 0 25px #ff00ff; }
-}
-
-/* SECTIONS */
-.box {
-  margin-top: 15px;
-  padding: 15px;
-  background: rgba(0, 240, 255, 0.1);
-  border-radius: 10px;
-
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-}
-
-/* HEADINGS */
-.box h3 {
-  margin-bottom: 10px;
-}
-
-/* BUTTON */
-.upload-btn {
-  margin-bottom: 15px;
-  padding: 8px 15px;
-  border: none;
-  background: #00f0ff;
-  color: black;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .profile-box {
-    width: 150px;
-    height: 150px;
-  }
-
-  .title {
-    font-size: 22px;
-  }
-
-  .box {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .profile-card {
-    padding: 15px;
-  }
-
-  .profile-box {
-    width: 130px;
-    height: 130px;
-  }
-}
-</style>
+</div>
