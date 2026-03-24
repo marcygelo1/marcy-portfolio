@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0f172a;
+      background: linear-gradient(135deg, #0f172a, #1a0033, #0f172a);
       color: #e2e8f0;
       text-align: center;
     }
@@ -18,73 +18,62 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #020617;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
     }
 
     header h1 {
-      color: #22c55e;
-      font-size: 20px;
+      color: #ff4da6;
     }
 
     nav a {
       margin-left: 15px;
       text-decoration: none;
-      color: #e2e8f0;
+      color: #fff;
     }
 
     .container {
       padding: 40px;
     }
 
-    .hero {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .hero h2 {
-      font-size: 40px;
-      color: white;
-    }
-
-    .highlight {
-      color: #22c55e;
-    }
-
     .profile-card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(34,197,94,0.3);
-      text-align: center;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #ff4da6;
+      box-shadow: 0 0 20px #ff4da6;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: auto;
     }
 
     .profile-card img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      border: 3px solid #22c55e;
+      border: 3px solid #ff4da6;
+      margin-bottom: 15px;
     }
 
-    .card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 12px;
+    h2 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .highlight {
+      color: #ff4da6;
+    }
+
+    .box {
       margin-top: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 15px;
+      background: rgba(255, 77, 166, 0.1);
+      border-radius: 10px;
     }
 
     footer {
-      text-align: center;
-      padding: 20px;
-      background: #020617;
       margin-top: 40px;
+      padding: 20px;
+      background: rgba(0,0,0,0.8);
     }
   </style>
 </head>
@@ -93,44 +82,44 @@
 <header>
   <h1>Marcy Angelo M. Villegas</h1>
   <nav>
-    <a href="#about">About</a>
-    <a href="#info">Personal Info</a>
-    <a href="#contact">Contact</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
   </nav>
 </header>
 
 <div class="container">
-  <section class="hero">
-    <div class="profile-card">
-      <img src="profile.jpg" alt="Profile Picture">
-      <h3>Marcy Angelo M. Villegas</h3>
-      <p>Frontend Developer</p>
+  <div class="profile-card">
+    <img src="profile.jpg" alt="Profile Picture">
+    <h2>Marcy Angelo M. Villegas</h2>
+    <p>Frontend Developer</p>
+
+    <div class="box">
+      <p>
+        I am Marcy Angelo M. Villegas, a passionate Frontend Developer focused on creating clean, responsive, and user-friendly web interfaces. I have a strong interest in modern web technologies and continuously strive to improve my skills in building functional and visually appealing websites. I am dedicated to delivering quality work, learning new tools, and adapting to different challenges in the field of web development.
+      </p>
     </div>
 
-    <h2>Frontend Developer<br><span class="highlight">Creating Clean Digital Experiences</span></h2>
+    <div class="box">
+      <h3>Who I Am</h3>
+      <p>
+        I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences. I value continuous learning, creativity, and attention to detail. I am currently developing my expertise in frontend development while building projects that enhance both my technical and problem-solving skills.
+      </p>
+    </div>
 
-    <p>
-      I am Marcy Angelo M. Villegas, a passionate Frontend Developer focused on creating clean, responsive, and user-friendly web interfaces. I have a strong interest in modern web technologies and continuously strive to improve my skills in building functional and visually appealing websites. I am dedicated to delivering quality work, learning new tools, and adapting to different challenges in the field of web development.
-    </p>
-  </section>
+    <div class="box">
+      <h3>Strengths</h3>
+      <p>
+        I am a detail-oriented and adaptable individual with a strong problem-solving mindset. I am a fast learner who is eager to continuously improve my skills in frontend development. I can work both independently and collaboratively, and I am committed to delivering quality work while staying open to learning new technologies and ideas.
+      </p>
+    </div>
 
-  <section id="info" class="card">
-    <h3>Who I Am</h3>
-    <p>
-      I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences. I value continuous learning, creativity, and attention to detail. I am currently developing my expertise in frontend development while building projects that enhance both my technical and problem-solving skills.
-    </p>
+    <div class="box">
+      <h3>Contact</h3>
+      <p>Email: mmamvillegas@tip.edu.ph</p>
+      <p>GitHub: github.com/marcygelo1/portfolio</p>
+    </div>
 
-    <h3>Strengths</h3>
-    <p>
-      I am a detail-oriented and adaptable individual with a strong problem-solving mindset. I am a fast learner who is eager to continuously improve my skills in frontend development. I can work both independently and collaboratively, and I am committed to delivering quality work while staying open to learning new technologies and ideas.
-    </p>
-  </section>
-
-  <section id="contact" class="card">
-    <h3>Contact</h3>
-    <p>Email: mmamvillegas@tip.edu.ph</p>
-    <p>GitHub: github.com/marcygelo1/portfolio</p>
-  </section>
+  </div>
 </div>
 
 <footer>
