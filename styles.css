@@ -7,36 +7,54 @@ body {
   animation: bgMove 10s ease infinite;
   color: #e2e8f0;
 
+  /* CENTER EVERYTHING */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   text-align: center;
+  overflow-x: hidden;
 }
 
-/* BACKGROUND ANIMATION */
 @keyframes bgMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* MAIN CARD */
+/* floating particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00f0ff;
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 0; }
+  to { transform: translateY(-10vh); opacity: 1; }
+}
+
+/* CARD */
 .profile-card {
   background: rgba(0,0,0,0.7);
   border: 1px solid #00f0ff;
   box-shadow: 0 0 25px #00f0ff;
+
   padding: 25px;
   border-radius: 20px;
+
   width: 90%;
-  max-width: 700px;
+  max-width: 650px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* PROFILE IMAGE */
+/* PROFILE BOX */
 .profile-box {
   width: 180px;
   height: 180px;
@@ -48,6 +66,7 @@ body {
 
   cursor: pointer;
   overflow: hidden;
+
   margin-bottom: 15px;
 }
 
@@ -61,35 +80,6 @@ body {
 .profile-box.has-img img { display: block; }
 .profile-box.has-img span { display: none; }
 
-/* NAME */
-.title {
-  font-size: 26px;
-  margin-bottom: 5px;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #00f0ff; }
-  to { text-shadow: 0 0 25px #ff00ff; }
-}
-
-/* SECTIONS */
-.box {
-  margin-top: 15px;
-  padding: 15px;
-  background: rgba(0, 240, 255, 0.1);
-  border-radius: 10px;
-
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-}
-
-/* HEADINGS */
-.box h3 {
-  margin-bottom: 10px;
-}
-
 /* BUTTON */
 .upload-btn {
   margin-bottom: 15px;
@@ -101,11 +91,42 @@ body {
   border-radius: 5px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
+/* SECTIONS */
+.box {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(0, 240, 255, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+/* NAME ANIMATION */
+.title {
+  font-size: 26px;
+  animation: glow 2s infinite alternate;
+  text-align: center;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #00f0ff; }
+  to { text-shadow: 0 0 25px #ff00ff; }
+}
+
+/* RESPONSIVE DESIGN */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .profile-card {
+    max-width: 90%;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
   .profile-box {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
   }
 
   .title {
@@ -114,17 +135,6 @@ body {
 
   .box {
     font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .profile-card {
-    padding: 15px;
-  }
-
-  .profile-box {
-    width: 130px;
-    height: 130px;
   }
 }
 </style>
