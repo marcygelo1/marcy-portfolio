@@ -11,15 +11,21 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            line-height: 1.4;
             background: 
                 linear-gradient(135deg, #0a0e27 0%, #1a1f3d 50%, #0d1421 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            overflow-x: hidden;
         }
 
         /* Cyberpunk Grid Overlay */
@@ -37,130 +43,112 @@
             z-index: 1;
         }
 
-        /* Glowing Orbs - Masculine Tones */
+        /* Glowing Orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.3;
+            opacity: 0.25;
             z-index: 0;
             animation: float 20s infinite ease-in-out;
         }
 
         .orb-1 {
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
+            top: -50px;
+            right: -50px;
         }
 
         .orb-2 {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             background: radial-gradient(circle, #ffd700 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
+            bottom: -30px;
+            left: -30px;
             animation-delay: -5s;
         }
 
         .orb-3 {
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             background: radial-gradient(circle, #00ff88 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
+            top: 40%;
+            left: 30%;
             animation-delay: -10s;
         }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -30px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.9); }
-            75% { transform: translate(20px, 30px) scale(1.05); }
+            25% { transform: translate(20px, -20px) scale(1.1); }
+            50% { transform: translate(-15px, 15px) scale(0.9); }
+            75% { transform: translate(15px, 20px) scale(1.05); }
         }
 
-        /* Centered Container */
+        /* Main Container - Full Screen */
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+            width: 95vw;
+            height: 95vh;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 15px;
             position: relative;
             z-index: 2;
+            padding: 10px;
         }
 
-        /* Photo Box - Dark Elegant */
+        /* Photo Box - Left Side */
         .photo-box {
+            grid-row: 1 / 4;
             background: rgba(20, 25, 50, 0.95);
-            border-radius: 20px;
-            padding: 35px;
+            border-radius: 15px;
+            padding: 20px;
             box-shadow: 
-                0 0 30px rgba(0, 212, 255, 0.2),
-                0 0 60px rgba(255, 215, 0, 0.1),
-                inset 0 0 20px rgba(0, 212, 255, 0.05);
-            text-align: center;
+                0 0 20px rgba(0, 212, 255, 0.2),
+                inset 0 0 10px rgba(0, 212, 255, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
+            gap: 15px;
             border: 1px solid rgba(0, 212, 255, 0.3);
             position: relative;
-            overflow: hidden;
         }
 
-        .photo-box::before {
+        .photo-box::before, .photo-box::after {
             content: '◆';
             position: absolute;
-            top: 10px;
-            left: 15px;
             color: #00d4ff;
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.6;
-            animation: pulse 3s infinite;
         }
 
-        .photo-box::after {
-            content: '◆';
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #ffd700;
-            font-size: 1.2rem;
-            opacity: 0.6;
-            animation: pulse 3s infinite 1.5s;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
+        .photo-box::before { top: 10px; left: 10px; }
+        .photo-box::after { top: 10px; right: 10px; color: #ffd700; }
 
         .photo-placeholder {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #1a1f3d 0%, #0f1525 50%, #1a2332 100%);
-            border: 3px dashed;
-            border-image: linear-gradient(45deg, #00d4ff, #ffd700, #00ff88, #00d4ff) 1;
-            border-radius: 15px;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #1a1f3d 0%, #0f1525 100%);
+            border: 2px dashed;
+            border-image: linear-gradient(45deg, #00d4ff, #ffd700) 1;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #8899a6;
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .photo-placeholder:hover {
-            background: linear-gradient(135deg, #1e2540 0%, #131b2b 50%, #1e2838 100%);
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
 
         .photo-placeholder input[type="file"] {
@@ -172,121 +160,95 @@
         }
 
         .upload-btn {
-            background: linear-gradient(45deg, #00d4ff, #0099cc, #ffd700);
-            background-size: 200% 200%;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
             color: #0a0e27;
             border: none;
-            padding: 14px 35px;
-            border-radius: 30px;
+            padding: 10px 25px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-            animation: gradientShift 3s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
         }
 
         .upload-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
         }
 
-        .upload-btn::before {
-            content: '▲';
-            margin-right: 8px;
-        }
-
-        /* Box Style for All Sections - Dark Glassmorphism */
-        .box {
-            background: rgba(20, 25, 50, 0.9);
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 
-                0 8px 32px rgba(0, 212, 255, 0.15),
-                0 0 20px rgba(255, 215, 0, 0.1);
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left 0.7s;
-        }
-
-        .box:hover::before {
-            left: 100%;
-        }
-
-        .box:hover {
-            transform: translateY(-8px);
-            box-shadow: 
-                0 15px 40px rgba(0, 212, 255, 0.25),
-                0 0 30px rgba(255, 215, 0, 0.15);
-            border-color: rgba(0, 212, 255, 0.4);
-        }
-
-        /* Header Box - Dark Cyan Gold */
+        /* Header Box - Top */
         .header-box {
+            grid-column: 2;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.9) 0%, rgba(0, 153, 204, 0.9) 50%, rgba(255, 215, 0, 0.8) 100%);
             color: #0a0e27;
-            position: relative;
-        }
-
-        .header-box::after {
-            content: '◈';
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-            font-size: 2rem;
-            opacity: 0.3;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header-box h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         .header-box p {
-            font-size: 1.3rem;
-            opacity: 0.95;
+            font-size: 1.1rem;
             font-weight: 500;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            opacity: 0.9;
         }
 
-        /* Content Boxes */
+        /* Content Area - Middle */
+        .content-area {
+            grid-column: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            overflow: hidden;
+        }
+
+        .content-box {
+            background: rgba(20, 25, 50, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 
+                0 5px 20px rgba(0, 212, 255, 0.15),
+                0 0 10px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 30px rgba(0, 212, 255, 0.25),
+                0 0 20px rgba(255, 215, 0, 0.15);
+            border-color: rgba(0, 212, 255, 0.4);
+        }
+
         .content-box h2 {
             color: #00d4ff;
-            margin-bottom: 20px;
-            font-size: 1.6rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 12px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 8px;
         }
 
         .content-box h2::after {
@@ -295,17 +257,16 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #00d4ff, #ffd700, #00ff88);
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #ffd700);
         }
 
         .content-box p {
             color: #b8c5d6;
-            line-height: 1.9;
-            font-size: 1.05rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            flex: 1;
         }
 
         .content-box ul {
@@ -313,108 +274,71 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .content-box ul li {
             background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
             color: #0a0e27;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-size: 0.95rem;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.75rem;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-            transition: all 0.3s ease;
-            cursor: default;
         }
 
-        .content-box ul li:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
-            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
-        }
-
-        /* Contact Links */
         .content-box a {
             color: #ffd700;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .content-box a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00d4ff, #ffd700);
-            transition: width 0.3s ease;
+            font-size: 0.85rem;
+            transition: color 0.3s;
         }
 
         .content-box a:hover {
             color: #00d4ff;
         }
 
-        .content-box a:hover::after {
-            width: 100%;
-        }
-
-        /* Footer Box */
+        /* Footer Box - Bottom */
         .footer-box {
+            grid-column: 2;
             background: linear-gradient(135deg, rgba(0, 100, 100, 0.9) 0%, rgba(0, 212, 255, 0.9) 100%);
             color: #0a0e27;
-            padding: 25px;
-            position: relative;
-        }
-
-        .footer-box::before {
-            content: '◆';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2rem;
-            opacity: 0.5;
-            animation: rotate 4s infinite linear;
-        }
-
-        @keyframes rotate {
-            0% { transform: translateX(-50%) rotate(0deg); }
-            100% { transform: translateX(-50%) rotate(360deg); }
-        }
-
-        .footer-box p {
-            font-size: 0.95rem;
-            opacity: 0.95;
-            margin-top: 10px;
-            font-weight: 500;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 15px;
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+                overflow-y: auto;
             }
             
-            .box, .photo-box {
-                padding: 25px;
+            .photo-box {
+                grid-row: 1;
+                flex-direction: row;
+                padding: 15px;
             }
             
             .photo-placeholder {
-                width: 150px;
-                height: 150px;
+                width: 120px;
+                height: 120px;
             }
             
-            .header-box h1 {
-                font-size: 1.7rem;
+            .header-box, .content-area, .footer-box {
+                grid-column: 1;
             }
-
-            .content-box h2 {
-                font-size: 1.3rem;
+            
+            .content-area {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -429,51 +353,47 @@
         <!-- Profile Photo Box -->
         <div class="photo-box">
             <div class="photo-placeholder" onclick="document.getElementById('fileInput').click()">
-                <span>Add a Photo</span>
+                <span>Add Photo</span>
                 <input type="file" id="fileInput" accept="image/*" onchange="previewImage(this)">
             </div>
-            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Upload Photo</button>
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Upload</button>
         </div>
 
         <!-- Header Box -->
-        <header class="box header-box">
+        <header class="header-box">
             <h1>Marcy Angelo M. Villegas</h1>
             <p>Frontend Developer</p>
         </header>
         
-        <!-- Introduction Box -->
-        <section class="box content-box" id="introduction">
-            <h2>Brief Introduction</h2>
-            <p>Hello! I am Marcy Angelo M. Villegas, a passionate individual who loves technology and design. I enjoy creating beautiful and functional web experiences.</p>
-        </section>
-        
-        <!-- Who I Am Box -->
-        <section class="box content-box" id="who-i-am">
-            <h2>Who I Am</h2>
-            <p>I am a dedicated professional with expertise in web development and a keen eye for detail. My goal is to deliver top-quality projects that meet the needs of my clients.</p>
-        </section>
-        
-        <!-- Strengths Box -->
-        <section class="box content-box" id="strengths">
-            <h2>Strengths</h2>
-            <ul>
-                <li>Web Development</li>
-                <li>Creative Design</li>
-                <li>Problem Solving</li>
-                <li>Collaboration</li>
-            </ul>
-        </section>
-        
-        <!-- Contact Box -->
-        <section class="box content-box" id="contact">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:mmamvillegas@tip.edu.ph">mmamvillegas@tip.edu.ph</a></p>
-            <p>GitHub: <a href="https://github.com/marcygelo1/portfolio" target="_blank">github.com/marcygelo1/portfolio</a></p>
-        </section>
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Introduction Box -->
+            <section class="content-box" id="introduction">
+                <h2>Introduction</h2>
+                <p>Hello! I am Marcy Angelo M. Villegas, a passionate individual who loves technology and design. I enjoy creating beautiful and functional web experiences.</p>
+            </section>
+            
+            <!-- Who I Am Box -->
+            <section class="content-box" id="who-i-am">
+                <h2>Who I Am</h2>
+                <p>I am a dedicated professional with expertise in web development and a keen eye for detail. My goal is to deliver top-quality projects.</p>
+            </section>
+            
+            <!-- Strengths Box -->
+            <section class="content-box" id="strengths">
+                <h2>Strengths</h2>
+                <ul>
+                    <li>Web Dev</li>
+                    <li>Design</li>
+                    <li>Problem Solving</li>
+                    <li>Collaboration</li>
+                </ul>
+            </section>
+        </div>
 
-        <!-- Footer Box -->
-        <footer class="box footer-box">
-            <p>&copy; 2024 Marcy Angelo M. Villegas. All rights reserved.</p>
+        <!-- Contact & Footer Combined -->
+        <footer class="footer-box">
+            <span>Email: <a href="mailto:mmamvillegas@tip.edu.ph" style="color: #0a0e27;">mmamvillegas@tip.edu.ph</a> | GitHub: <a href="https://github.com/marcygelo1/portfolio" target="_blank" style="color: #0a0e27;">github.com/marcygelo1/portfolio</a> | © 2024 Marcy Angelo M. Villegas</span>
         </footer>
     </div>
 
@@ -483,7 +403,7 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const placeholder = document.querySelector('.photo-placeholder');
-                    placeholder.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">`;
+                    placeholder.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
                     placeholder.style.padding = '0';
                     placeholder.style.border = 'none';
                 };
