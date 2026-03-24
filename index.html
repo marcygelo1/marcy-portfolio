@@ -3,48 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcy Angelo's Portfolio</title>
+    <title>Marcy Angelo M. Villegas - Portfolio</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
-            padding: 0;
+            height: 100vh;
+            background: linear-gradient(270deg, #00CFFF, #FF007F);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
-        header {
-            background: linear-gradient(to right, purple, violet);
-            color: white;
-            padding: 20px;
-            text-align: center;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        section {
+        .content {
+            position: relative;
+            z-index: 10;
             padding: 20px;
-            margin: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        }
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                rgba(0, 0, 0, 0.1) 0,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+        }
+        h1, h2, p {
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #00CFFF;
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="scanlines"></div>
+    <div class="content">
         <h1>Marcy Angelo M. Villegas</h1>
-    </header>
-    <section id="introduction">
-        <h2>Brief Introduction</h2>
-        <p>Hello! I am Marcy Angelo M. Villegas, a passionate individual who loves technology and design. I enjoy creating beautiful and functional web experiences.</p>
-    </section>
-    <section id="who-i-am">
-        <h2>Who I Am</h2>
-        <p>I am a dedicated professional with expertise in web development and a keen eye for detail. My goal is to deliver top-quality projects that meet the needs of my clients.</p>
-    </section>
-    <section id="strengths">
-        <h2>Strengths</h2>
-        <ul>
-            <li>Web Development</li>
-            <li>Creative Design</li>
-            <li>Problem Solving</li>
-            <li>Collaboration</li>
-        </ul>
-    </section>
+        <h2>Personal Portfolio</h2>
+        <p>Welcome to my portfolio! Here you will find information about my projects, skills, and experience.</p>
+        <p>Email: marcyangelo@example.com</p>
+        <p>LinkedIn: linkedin.com/in/marcyangelo</p>
+        <p>GitHub: github.com/marcygelo1</p>
+        <p>Skills: Web Development, Graphic Design, Animation</p>
+        <p>About me: I am passionate about creating visually stunning and engaging web experiences.</p>
+    </div>
 </body>
 </html>
