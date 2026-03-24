@@ -1,0 +1,35 @@
+.header {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+section {
+    padding: 50px;
+    margin: 20px 0;
+}
+
+.project {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    background: white;
+}
+
+.footer {
+    background: #667eea;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .header, section, .footer {
+        padding: 15px;
+    }
+}
