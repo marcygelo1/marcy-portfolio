@@ -13,12 +13,9 @@
 
         :root {
             --neon-cyan: #00d4ff;
-            --neon-blue: #0099cc;
             --neon-gold: #ffd700;
-            --neon-amber: #ffaa00;
             --dark-bg: #050510;
             --panel-bg: rgba(10, 15, 30, 0.95);
-            --grid-line: rgba(0, 212, 255, 0.1);
         }
 
         html, body {
@@ -29,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* ==================== ORIGINAL BACKGROUND ==================== */
+        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -74,57 +71,7 @@
             100% { transform: translateY(4px); }
         }
 
-        .grid {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background-image: linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: center top;
-            animation: gridMove 15s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
-        }
-
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00d4ff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00d4ff;
-            animation: floatUp linear infinite;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-duration: 12s; }
-        .particle:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 2s; background: #ff0080; box-shadow: 0 0 10px #ff0080; }
-        .particle:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: 4s; }
-        .particle:nth-child(4) { left: 40%; animation-duration: 18s; animation-delay: 1s; background: #ffd700; box-shadow: 0 0 10px #ffd700; }
-        .particle:nth-child(5) { left: 50%; animation-duration: 14s; animation-delay: 3s; }
-        .particle:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 5s; background: #00ff88; box-shadow: 0 0 10px #00ff88; }
-        .particle:nth-child(7) { left: 70%; animation-duration: 16s; animation-delay: 2s; }
-        .particle:nth-child(8) { left: 80%; animation-duration: 13s; animation-delay: 4s; background: #ff0080; box-shadow: 0 0 10px #ff0080; }
-        .particle:nth-child(9) { left: 90%; animation-duration: 17s; animation-delay: 1s; }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
-
-        /* ==================== NAVIGATION ==================== */
+        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -184,19 +131,19 @@
             width: 100%;
         }
 
-        /* ==================== MAIN CONTAINER (ORIGINAL) ==================== */
+        /* Main Container */
         .main-container {
             position: relative;
             margin-top: 60px;
-            padding: 20px 15px 70px;
+            padding: 20px 15px 100px;
             min-height: calc(100vh - 60px);
             z-index: 10;
         }
 
-        /* ==================== CENTER CARD (PROFILE) ==================== */
+        /* Profile Card - Compact */
         .center-card {
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             margin: 0 auto;
             background: rgba(10, 15, 30, 0.95);
             border: 2px solid #00d4ff;
@@ -205,7 +152,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 18px;
             animation: cardFadeIn 0.8s ease;
         }
 
@@ -214,13 +161,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .center-card.hidden {
-            display: none;
-        }
-
         .photo-area {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 3px solid #00d4ff;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%);
@@ -232,22 +175,17 @@
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
             flex-shrink: 0;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s ease;
             animation: photoPulse 3s ease-in-out infinite;
         }
 
         @keyframes photoPulse {
             0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(0, 255, 136, 0.5); }
+            50% { box-shadow: 0 0 35px rgba(0, 255, 136, 0.5); }
         }
 
         .photo-area:hover {
-            transform: scale(1.08) rotate(5deg);
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.6);
-        }
-
-        .photo-area:active {
-            transform: scale(0.95);
+            transform: scale(1.05) rotate(3deg);
         }
 
         .photo-area.has-photo {
@@ -256,15 +194,9 @@
 
         .photo-placeholder {
             color: #8899a6;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-align: center;
-            transition: all 0.3s ease;
             pointer-events: none;
-        }
-
-        .photo-area:hover .photo-placeholder {
-            color: #00d4ff;
-            transform: scale(1.1);
         }
 
         .photo-preview {
@@ -284,7 +216,7 @@
             text-align: center;
             width: 100%;
             cursor: pointer;
-            padding: 10px;
+            padding: 8px;
             border-radius: 10px;
             transition: all 0.3s ease;
             animation: nameSlideIn 0.8s ease 0.2s both;
@@ -297,37 +229,37 @@
 
         .name-section:hover {
             background: rgba(0, 212, 255, 0.1);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .name-section h1 {
             color: #ffd700;
-            font-size: 1.4rem;
-            margin-bottom: 8px;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
             line-height: 1.3;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .name-section p {
             color: #00ff88;
-            font-size: 0.85rem;
-            letter-spacing: 3px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
         }
 
+        /* Info Sections - Compact with Animations */
         .info-sections {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .info-box {
             background: rgba(0, 212, 255, 0.08);
             border-left: 3px solid #00d4ff;
             border-radius: 0 10px 10px 0;
-            padding: 18px 15px;
+            padding: 14px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -340,8 +272,23 @@
         .info-box:nth-child(3) { animation-delay: 0.5s; }
 
         @keyframes boxSlideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateX(-50px) scale(0.9); }
+            to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .info-box:hover::before {
+            left: 100%;
         }
 
         .info-box:hover {
@@ -355,12 +302,22 @@
             transform: scale(0.98);
         }
 
+        .info-box.clicking {
+            animation: boxClick 0.4s ease;
+        }
+
+        @keyframes boxClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); box-shadow: 0 0 25px rgba(0, 212, 255, 0.5); }
+            100% { transform: scale(1); }
+        }
+
         .info-box h3 {
             color: #00d4ff;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             transition: color 0.3s ease;
         }
 
@@ -370,11 +327,11 @@
 
         .info-box p {
             color: #a0b0c0;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             line-height: 1.4;
         }
 
-        /* ==================== CONTENT PANEL ==================== */
+        /* Content Panel */
         .content-panel {
             display: none;
             position: fixed;
@@ -390,7 +347,7 @@
 
         .content-panel.active {
             display: block;
-            animation: panelSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: panelSlideUp 0.4s ease;
         }
 
         @keyframes panelSlideUp {
@@ -400,7 +357,7 @@
 
         .panel-header {
             color: #ffd700;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid #00d4ff;
@@ -413,12 +370,12 @@
         .panel-header::before {
             content: '◆';
             color: #00d4ff;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
         .panel-content {
             color: #c0d0e0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.8;
         }
 
@@ -426,17 +383,81 @@
             margin-bottom: 15px;
         }
 
+        /* Contact Items in Panel */
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            animation: contactSlideIn 0.5s ease both;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 0.2s; }
+        .contact-item:nth-child(2) { animation-delay: 0.3s; }
+
+        @keyframes contactSlideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateX(10px);
+            border-color: #ffd700;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: #00d4ff;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text a {
+            color: #b8c5d6;
+            text-decoration: none;
+            font-size: 0.85rem;
+            word-break: break-all;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: #ffd700;
+        }
+
         .close-btn {
             position: fixed;
             top: 70px;
             right: 15px;
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             background: rgba(0, 212, 255, 0.2);
             border: 2px solid #00d4ff;
             color: #00d4ff;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -448,388 +469,230 @@
         .close-btn:hover {
             background: #00d4ff;
             color: #0a0e27;
-            transform: rotate(90deg) scale(1.1);
+            transform: rotate(90deg);
         }
 
-        /* ==================== CYBERPUNK CHAT INTERFACE ==================== */
-        .chat-interface {
-            display: none;
+        /* Chat Assistant (Bottom Right) */
+        .chat-assistant {
             position: fixed;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 110px);
-            background: rgba(5, 5, 16, 0.98);
-            z-index: 200;
-            flex-direction: column;
+            bottom: 70px;
+            right: 15px;
+            width: 60px;
+            height: 60px;
+            z-index: 999;
         }
 
-        .chat-interface.active {
+        .chat-assistant-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #00d4ff;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            color: #00d4ff;
+            font-size: 1.8rem;
+            cursor: pointer;
             display: flex;
-            animation: chatFadeIn 0.5s ease;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 5px 25px rgba(0, 212, 255, 0.4),
+                inset 0 0 20px rgba(0, 212, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: assistantPulse 2s ease-in-out infinite;
+            position: relative;
         }
 
-        @keyframes chatFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes assistantPulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(0, 212, 255, 0.4), inset 0 0 20px rgba(0, 212, 255, 0.1); }
+            50% { box-shadow: 0 5px 35px rgba(0, 212, 255, 0.6), inset 0 0 30px rgba(0, 212, 255, 0.2); }
         }
 
-        /* Chat Header - Masculine Wedding */
-        .chat-header-cyber {
-            height: 70px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
-            border-bottom: 2px solid var(--neon-cyan);
+        .chat-assistant-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(255, 215, 0, 0.2) 100%);
+        }
+
+        .chat-assistant-btn.active {
+            transform: rotate(45deg);
+            background: rgba(255, 0, 100, 0.2);
+            border-color: #ff0066;
+            color: #ff0066;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            border: 2px solid #050510;
+            animation: notificationPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes notificationPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .chat-assistant-window {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 320px;
+            max-height: 450px;
+            background: rgba(10, 15, 30, 0.98);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+            transform: scale(0) translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chat-assistant-window.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .chat-assistant-header {
+            height: 50px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            position: relative;
-            overflow: hidden;
+            padding: 0 15px;
         }
 
-        .chat-header-cyber::before {
-            content: '◆ ◆ ◆';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(0, 212, 255, 0.1);
-            font-size: 0.7rem;
-            letter-spacing: 15px;
-            pointer-events: none;
-        }
-
-        .wedding-band {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--neon-cyan) 20%, 
-                var(--neon-gold) 50%, 
-                var(--neon-cyan) 80%, 
-                transparent 100%
-            );
-            background-size: 200% 100%;
-            animation: bandShine 3s linear infinite;
-        }
-
-        @keyframes bandShine {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-
-        .chat-header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .chat-avatar-ring {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--neon-cyan);
-            padding: 2px;
-            position: relative;
-            animation: ringPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes ringPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(0, 212, 255, 0); }
-        }
-
-        .chat-avatar-ring img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .chat-header-info h3 {
-            color: var(--neon-gold);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-
-        .chat-header-info span {
-            color: #00ff88;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .chat-header-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-action-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--neon-cyan);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .chat-action-btn:hover {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* Chat Messages */
-        .chat-messages-cyber {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .chat-messages-cyber::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .chat-messages-cyber::-webkit-scrollbar-track {
-            background: rgba(0, 212, 255, 0.05);
-        }
-
-        .chat-messages-cyber::-webkit-scrollbar-thumb {
-            background: var(--neon-cyan);
-            border-radius: 3px;
-        }
-
-        .message-cyber {
-            max-width: 80%;
-            padding: 12px 18px;
-            border-radius: 18px;
-            position: relative;
-            animation: messagePop 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        @keyframes messagePop {
-            from { opacity: 0; transform: translateY(20px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .message-received-cyber {
-            align-self: flex-start;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.12) 0%, rgba(0, 153, 204, 0.08) 100%);
-            border: 1px solid rgba(0, 212, 255, 0.25);
-            border-bottom-left-radius: 4px;
-        }
-
-        .message-sent-cyber {
-            align-self: flex-end;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 170, 0, 0.08) 100%);
-            border: 1px solid rgba(255, 215, 0, 0.25);
-            border-bottom-right-radius: 4px;
-        }
-
-        .message-header-cyber {
+        .chat-assistant-header h4 {
+            color: #ffd700;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 6px;
         }
 
-        .message-avatar-cyber {
+        .chat-assistant-header h4::before {
+            content: '◆';
+            color: #00d4ff;
+            font-size: 0.7rem;
+        }
+
+        .chat-assistant-close {
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            border: 1px solid var(--neon-cyan);
-        }
-
-        .message-name-cyber {
-            color: var(--neon-cyan);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .message-sent-cyber .message-name-cyber {
-            color: var(--neon-gold);
-        }
-
-        .message-time-cyber {
-            color: rgba(184, 197, 214, 0.5);
-            font-size: 0.65rem;
-            margin-left: auto;
-        }
-
-        .message-text-cyber {
-            color: #c0d0e0;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Typing Indicator */
-        .typing-indicator-cyber {
-            display: flex;
-            gap: 6px;
-            padding: 15px;
-            align-self: flex-start;
-        }
-
-        .typing-dot-cyber {
-            width: 8px;
-            height: 8px;
-            background: var(--neon-cyan);
-            border-radius: 50%;
-            animation: typingBounce 1.4s ease-in-out infinite;
-        }
-
-        .typing-dot-cyber:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot-cyber:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingBounce {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-8px); }
-        }
-
-        /* Chat Input */
-        .chat-input-area-cyber {
-            padding: 15px 20px;
-            background: rgba(5, 5, 16, 0.95);
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .chat-attach-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--neon-gold);
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chat-attach-btn:hover {
-            background: var(--neon-gold);
-            color: var(--dark-bg);
-            transform: rotate(45deg);
-        }
-
-        .chat-input-wrapper {
-            flex: 1;
-            position: relative;
-        }
-
-        .chat-input-cyber {
-            width: 100%;
-            padding: 12px 18px;
-            border-radius: 22px;
-            border: 1px solid rgba(0, 212, 255, 0.25);
-            background: rgba(0, 212, 255, 0.05);
-            color: #fff;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .chat-input-cyber:focus {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        .chat-input-cyber::placeholder {
-            color: rgba(184, 197, 214, 0.4);
-        }
-
-        .chat-send-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
-            color: var(--dark-bg);
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-        }
-
-        .chat-send-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
-        }
-
-        .chat-send-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Date Separator */
-        .date-separator-cyber {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 15px 0;
-            color: rgba(255, 215, 0, 0.5);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .date-separator-cyber::before,
-        .date-separator-cyber::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
-        }
-
-        /* Back Button */
-        .chat-back-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
             border: 1px solid rgba(0, 212, 255, 0.3);
             background: rgba(0, 212, 255, 0.1);
-            color: var(--neon-cyan);
+            color: #00d4ff;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            transition: all 0.3s ease;
         }
 
-        .chat-back-btn:hover {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-            transform: translateX(-3px);
+        .chat-assistant-close:hover {
+            background: #00d4ff;
+            color: #050510;
+        }
+
+        .chat-assistant-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-assistant-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-assistant-messages::-webkit-scrollbar-thumb {
+            background: #00d4ff;
+            border-radius: 2px;
+        }
+
+        .assistant-message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            animation: messagePop 0.3s ease;
+        }
+
+        .assistant-message.bot {
+            align-self: flex-start;
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-bottom-left-radius: 4px;
+            color: #c0d0e0;
+        }
+
+        .assistant-message.user {
+            align-self: flex-end;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-bottom-right-radius: 4px;
+            color: #ffd700;
+        }
+
+        @keyframes messagePop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .chat-assistant-input {
+            padding: 12px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            display: flex;
+            gap: 8px;
+        }
+
+        .assistant-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            background: rgba(0, 212, 255, 0.05);
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .assistant-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
+        .assistant-send {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #050510;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .assistant-send:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
         }
 
         /* Footer */
@@ -863,37 +726,52 @@
             }
 
             .center-card {
-                width: 500px;
-                max-width: 500px;
-                padding: 40px;
+                width: 420px;
+                max-width: 420px;
+                padding: 30px;
             }
 
             .photo-area {
-                width: 180px;
-                height: 180px;
+                width: 140px;
+                height: 140px;
             }
 
             .name-section h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
 
-            .chat-interface {
+            .content-panel {
+                position: fixed;
                 top: 60px;
                 left: 50%;
                 transform: translateX(-50%);
                 width: 90%;
-                max-width: 900px;
-                height: calc(100vh - 120px);
+                max-width: 600px;
+                height: calc(100vh - 130px);
                 border-radius: 20px;
                 border: 2px solid rgba(0, 212, 255, 0.3);
             }
 
-            .chat-messages-cyber {
-                padding: 30px;
+            .chat-assistant {
+                bottom: 80px;
+                right: 30px;
             }
 
-            .message-cyber {
-                max-width: 70%;
+            .chat-assistant-window {
+                width: 350px;
+                max-height: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-assistant {
+                right: 10px;
+                bottom: 60px;
+            }
+
+            .chat-assistant-window {
+                width: calc(100vw - 20px);
+                right: -5px;
             }
         }
     </style>
@@ -903,18 +781,6 @@
     <div class="bg-animation">
         <div class="gradient-mesh"></div>
         <div class="scanlines"></div>
-        <div class="grid"></div>
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
     </div>
 
     <!-- Navigation -->
@@ -922,7 +788,7 @@
         <div class="logo">Marcy Angelo</div>
         <div class="nav-links">
             <a href="#" onclick="showHome()">Home</a>
-            <a href="#" onclick="showChat()">Contact</a>
+            <a href="#" onclick="showContact()">Contact</a>
         </div>
     </nav>
 
@@ -940,17 +806,17 @@
             </div>
             
             <div class="info-sections">
-                <div class="info-box" onclick="showSection('whoiam')">
+                <div class="info-box" onclick="showSection('whoiam', this)">
                     <h3>Who I Am</h3>
                     <p>Click to learn more about me</p>
                 </div>
                 
-                <div class="info-box" onclick="showSection('personal')">
+                <div class="info-box" onclick="showSection('personal', this)">
                     <h3>Personal Information</h3>
                     <p>Click to view my background</p>
                 </div>
                 
-                <div class="info-box" onclick="showSection('strengths')">
+                <div class="info-box" onclick="showSection('strengths', this)">
                     <h3>Strengths</h3>
                     <p>Click to see my skills</p>
                 </div>
@@ -965,56 +831,27 @@
         </div>
     </div>
 
-    <!-- Cyberpunk Chat Interface -->
-    <div class="chat-interface" id="chatInterface">
-        <button class="chat-back-btn" onclick="closeChat()">←</button>
-        
-        <header class="chat-header-cyber">
-            <div class="chat-header-left">
-                <div class="chat-avatar-ring">
-                    <img src="https://via.placeholder.com/100/00d4ff/ffffff?text=MA" alt="Marcy Angelo" id="chatAvatar">
-                </div>
-                <div class="chat-header-info">
-                    <h3>Marcy Angelo M. Villegas</h3>
-                    <span>● Online</span>
+    <!-- Chat Assistant (Bottom Right) -->
+    <div class="chat-assistant" id="chatAssistant">
+        <div class="chat-assistant-window" id="chatAssistantWindow">
+            <div class="chat-assistant-header">
+                <h4>Virtual Assistant</h4>
+                <button class="chat-assistant-close" onclick="toggleChatAssistant()">×</button>
+            </div>
+            <div class="chat-assistant-messages" id="assistantMessages">
+                <div class="assistant-message bot">
+                    Hi! I'm Marcy's virtual assistant. Ask me anything about his skills, experience, or how to get in touch!
                 </div>
             </div>
-            <div class="chat-header-actions">
-                <button class="chat-action-btn" title="Voice Call">📞</button>
-                <button class="chat-action-btn" title="Video Call">📹</button>
-            </div>
-            <div class="wedding-band"></div>
-        </header>
-
-        <div class="chat-messages-cyber" id="chatMessagesCyber">
-            <div class="date-separator-cyber">Today</div>
-
-            <div class="message-cyber message-received-cyber">
-                <div class="message-header-cyber">
-                    <img src="https://via.placeholder.com/100/00d4ff/ffffff?text=MA" alt="Marcy" class="message-avatar-cyber">
-                    <span class="message-name-cyber">Marcy Angelo</span>
-                    <span class="message-time-cyber">10:30 AM</span>
-                </div>
-                <p class="message-text-cyber">Welcome to my cyberpunk chat! I'm a Frontend Developer specializing in futuristic designs. How can I help you today?</p>
-            </div>
-
-            <div class="typing-indicator-cyber" id="typingIndicatorCyber" style="display: none;">
-                <div class="typing-dot-cyber"></div>
-                <div class="typing-dot-cyber"></div>
-                <div class="typing-dot-cyber"></div>
+            <div class="chat-assistant-input">
+                <input type="text" class="assistant-input" id="assistantInput" placeholder="Ask me anything..." onkeypress="handleAssistantKey(event)">
+                <button class="assistant-send" onclick="sendAssistantMessage()">➤</button>
             </div>
         </div>
-
-        <div class="chat-input-area-cyber">
-            <button class="chat-attach-btn" onclick="document.getElementById('chatFileInput').click()" title="Attach File">+</button>
-            <input type="file" id="chatFileInput" style="display: none;" onchange="handleChatFile(this)">
-            
-            <div class="chat-input-wrapper">
-                <input type="text" class="chat-input-cyber" id="chatInputCyber" placeholder="Type a message..." onkeypress="handleChatKeyPress(event)">
-            </div>
-            
-            <button class="chat-send-btn" onclick="sendChatMessage()" title="Send">➤</button>
-        </div>
+        <button class="chat-assistant-btn" id="assistantBtn" onclick="toggleChatAssistant()">
+            <span id="assistantIcon">💬</span>
+            <div class="notification-dot" id="notificationDot"></div>
+        </button>
     </div>
 
     <!-- Footer -->
@@ -1031,19 +868,49 @@
         const sectionData = {
             'whoiam': {
                 title: 'Who I Am',
-                content: '<p>I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences. I value continuous learning, creativity, and attention to detail. I am currently developing my expertise in frontend development while building projects that enhance both my technical and problem-solving skills.</p>'
+                content: `<p>I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences. I value continuous learning, creativity, and attention to detail. I am currently developing my expertise in frontend development while building projects that enhance both my technical and problem-solving skills.</p>`
             },
             'personal': {
                 title: 'Personal Information',
-                content: '<p>I am Marcy Angelo M. Villegas, a passionate Frontend Developer focused on creating clean, responsive, and user-friendly web interfaces. I have a strong interest in modern web technologies and continuously strive to improve my skills in building functional and visually appealing websites. I am dedicated to delivering quality work, learning new tools, and adapting to different challenges in the field of web development.</p>'
+                content: `<p>I am Marcy Angelo M. Villegas, a passionate Frontend Developer focused on creating clean, responsive, and user-friendly web interfaces. I have a strong interest in modern web technologies and continuously strive to improve my skills in building functional and visually appealing websites. I am dedicated to delivering quality work, learning new tools, and adapting to different challenges in the field of web development.</p>`
             },
             'strengths': {
                 title: 'My Strengths',
-                content: '<p>I am a detail-oriented and adaptable individual with a strong problem-solving mindset. I am a fast learner who is eager to continuously improve my skills in frontend development. I can work both independently and collaboratively, and I am committed to delivering quality work while staying open to learning new technologies and ideas.</p>'
+                content: `<p>I am a detail-oriented and adaptable individual with a strong problem-solving mindset. I am a fast learner who is eager to continuously improve my skills in frontend development. I can work both independently and collaboratively, and I am committed to delivering quality work while staying open to learning new technologies and ideas.</p>`
+            },
+            'contact': {
+                title: 'Contact Me',
+                content: `<p>Get in touch with me through the following channels:</p>
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <a href="mailto:mmamvillegas@tip.edu.ph">mmamvillegas@tip.edu.ph</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💻</div>
+                        <div class="contact-text">
+                            <h4>GitHub</h4>
+                            <a href="https://github.com/marcygelo1/portfolio" target="_blank">github.com/marcygelo1/portfolio</a>
+                        </div>
+                    </div>
+                </div>`
             }
         };
 
-        // Load saved photo on page load
+        // Assistant responses
+        const assistantResponses = {
+            'skills': 'Marcy specializes in HTML5, CSS3, JavaScript, and modern frontend frameworks. He creates responsive, animated interfaces with a cyberpunk aesthetic.',
+            'experience': 'Marcy is currently developing his expertise in frontend development through various projects. He focuses on creating clean, user-friendly web interfaces.',
+            'contact': 'You can reach Marcy at mmamvillegas@tip.edu.ph or visit his GitHub at github.com/marcygelo1/portfolio',
+            'education': 'Marcy is studying at Technological Institute of the Philippines (TIP), focusing on web development and programming.',
+            'projects': 'Marcy has built several portfolio projects including this cyberpunk-themed website with interactive features and animations.',
+            'default': 'I can tell you about Marcy\'s skills, experience, education, projects, or how to contact him. What would you like to know?'
+        };
+
+        // Load saved photo
         window.addEventListener('DOMContentLoaded', () => {
             const savedPhoto = localStorage.getItem('profilePhoto');
             if (savedPhoto) {
@@ -1051,6 +918,12 @@
             } else {
                 setupPhotoUpload();
             }
+
+            // Hide notification dot after 5 seconds
+            setTimeout(() => {
+                const dot = document.getElementById('notificationDot');
+                if (dot) dot.style.display = 'none';
+            }, 5000);
         });
 
         // Setup photo upload
@@ -1085,14 +958,14 @@
             photoArea.classList.add('has-photo');
             photoArea.style.cursor = 'default';
             photoArea.onclick = null;
-            
-            // Also update chat avatar
-            const chatAvatar = document.getElementById('chatAvatar');
-            if (chatAvatar) chatAvatar.src = photoData;
         }
 
-        // Show section
-        function showSection(section) {
+        // Show section with animation
+        function showSection(section, element) {
+            // Add clicking animation
+            element.classList.add('clicking');
+            setTimeout(() => element.classList.remove('clicking'), 400);
+
             if (!isMobile() && !cardMoved) {
                 moveToCorner();
             }
@@ -1108,6 +981,23 @@
             panel.classList.add('active');
         }
 
+        // Show contact
+        function showContact() {
+            if (!isMobile() && !cardMoved) {
+                moveToCorner();
+            }
+            
+            const panel = document.getElementById('contentPanel');
+            const title = document.getElementById('panelTitle');
+            const content = document.getElementById('panelContent');
+            
+            const data = sectionData['contact'];
+            title.textContent = data.title;
+            content.innerHTML = data.content;
+            
+            panel.classList.add('active');
+        }
+
         // Move card to corner
         function moveToCorner() {
             if (isMobile() || cardMoved) return;
@@ -1117,11 +1007,11 @@
 
         // Show home
         function showHome() {
-            closeChat();
             const card = document.getElementById('profileCard');
             const panel = document.getElementById('contentPanel');
             
             panel.classList.remove('active');
+            
             if (!isMobile()) {
                 card.classList.remove('moved');
                 cardMoved = false;
@@ -1133,89 +1023,77 @@
             document.getElementById('contentPanel').classList.remove('active');
         }
 
-        // ==================== CHAT FUNCTIONS ====================
+        // ==================== CHAT ASSISTANT ====================
 
-        // Show chat interface
-        function showChat() {
-            document.getElementById('chatInterface').classList.add('active');
-            document.getElementById('mainContainer').style.display = 'none';
-            document.getElementById('chatInputCyber').focus();
-        }
-
-        // Close chat
-        function closeChat() {
-            document.getElementById('chatInterface').classList.remove('active');
-            document.getElementById('mainContainer').style.display = 'block';
-        }
-
-        // Send chat message
-        function sendChatMessage() {
-            const input = document.getElementById('chatInputCyber');
-            const message = input.value.trim();
-            if (!message) return;
-
-            addChatMessage(message, 'sent');
-            input.value = '';
-
-            // Simulate response
-            setTimeout(() => {
-                document.getElementById('typingIndicatorCyber').style.display = 'flex';
-                document.getElementById('chatMessagesCyber').scrollTop = document.getElementById('chatMessagesCyber').scrollHeight;
-            }, 500);
-
-            setTimeout(() => {
-                document.getElementById('typingIndicatorCyber').style.display = 'none';
-                const responses = [
-                    "Thanks for reaching out! I'd love to discuss your project.",
-                    "That sounds interesting! Tell me more about what you need.",
-                    "I can definitely help with that. What timeline are we looking at?",
-                    "Great question! I specialize in creating responsive, animated interfaces."
-                ];
-                addChatMessage(responses[Math.floor(Math.random() * responses.length)], 'received');
-            }, 2000);
-        }
-
-        // Add chat message
-        function addChatMessage(text, type) {
-            const container = document.getElementById('chatMessagesCyber');
-            const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        function toggleChatAssistant() {
+            const window = document.getElementById('chatAssistantWindow');
+            const btn = document.getElementById('assistantBtn');
+            const icon = document.getElementById('assistantIcon');
+            const dot = document.getElementById('notificationDot');
             
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `message-cyber message-${type}-cyber`;
+            window.classList.toggle('active');
+            btn.classList.toggle('active');
             
-            const isReceived = type === 'received';
-            const savedPhoto = localStorage.getItem('profilePhoto') || 'https://via.placeholder.com/100/00d4ff/ffffff?text=MA';
-            
-            msgDiv.innerHTML = `
-                <div class="message-header-cyber">
-                    ${isReceived ? `<img src="${savedPhoto}" alt="Marcy" class="message-avatar-cyber">` : ''}
-                    <span class="message-name-cyber">${isReceived ? 'Marcy Angelo' : 'You'}</span>
-                    <span class="message-time-cyber">${time}</span>
-                </div>
-                <p class="message-text-cyber">${escapeHtml(text)}</p>
-            `;
-            
-            container.insertBefore(msgDiv, document.getElementById('typingIndicatorCyber'));
-            container.scrollTop = container.scrollHeight;
-        }
-
-        // Handle chat key press
-        function handleChatKeyPress(event) {
-            if (event.key === 'Enter') sendChatMessage();
-        }
-
-        // Handle chat file
-        function handleChatFile(input) {
-            if (input.files && input.files[0]) {
-                addChatMessage(`📎 Attached: ${input.files[0].name}`, 'sent');
+            if (window.classList.contains('active')) {
+                icon.textContent = '✕';
+                dot.style.display = 'none';
+                document.getElementById('assistantInput').focus();
+            } else {
+                icon.textContent = '💬';
             }
         }
 
-        // Escape HTML
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
+        function sendAssistantMessage() {
+            const input = document.getElementById('assistantInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addAssistantMessage(message, 'user');
+            input.value = '';
+
+            // Generate response
+            setTimeout(() => {
+                const response = generateAssistantResponse(message);
+                addAssistantMessage(response, 'bot');
+            }, 800);
+        }
+
+        function addAssistantMessage(text, type) {
+            const container = document.getElementById('assistantMessages');
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `assistant-message ${type}`;
+            msgDiv.textContent = text;
+            
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function generateAssistantResponse(input) {
+            const lower = input.toLowerCase();
+            
+            if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('know')) {
+                return assistantResponses['skills'];
+            } else if (lower.includes('experience') || lower.includes('work') || lower.includes('job') || lower.includes('career')) {
+                return assistantResponses['experience'];
+            } else if (lower.includes('contact') || lower.includes('email') || lower.includes('reach') || lower.includes('github')) {
+                return assistantResponses['contact'];
+            } else if (lower.includes('education') || lower.includes('school') || lower.includes('study') || lower.includes('college')) {
+                return assistantResponses['education'];
+            } else if (lower.includes('project') || lower.includes('portfolio') || lower.includes('built') || lower.includes('create')) {
+                return assistantResponses['projects'];
+            } else if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+                return 'Hello! How can I help you learn more about Marcy today?';
+            } else if (lower.includes('bye') || lower.includes('goodbye') || lower.includes('thank')) {
+                return 'You\'re welcome! Feel free to reach out to Marcy directly if you have more questions.';
+            } else {
+                return assistantResponses['default'];
+            }
+        }
+
+        function handleAssistantKey(event) {
+            if (event.key === 'Enter') sendAssistantMessage();
         }
 
         // Handle resize
