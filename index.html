@@ -100,13 +100,14 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
             color: #ffd700;
         }
 
-        /* Mobile-First Main Container */
+        /* Main Container */
         .main-container {
             position: relative;
             margin-top: 60px;
@@ -115,7 +116,7 @@
             z-index: 10;
         }
 
-        /* Profile Card - Mobile First */
+        /* Profile Card */
         .center-card {
             width: 100%;
             max-width: 400px;
@@ -128,12 +129,19 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
+            animation: cardFadeIn 0.8s ease;
+        }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .center-card.hidden {
             display: none;
         }
 
+        /* Photo Area with Animations */
         .photo-area {
             width: 140px;
             height: 140px;
@@ -147,12 +155,52 @@
             overflow: hidden;
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
             flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: photoPulse 3s ease-in-out infinite, photoBounceIn 0.6s ease;
+        }
+
+        @keyframes photoBounceIn {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            60% { transform: scale(1.1) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes photoPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 136, 0.5); }
+        }
+
+        .photo-area:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.6);
+        }
+
+        .photo-area:active {
+            transform: scale(0.95);
+        }
+
+        .photo-area.has-photo {
+            border-color: #00ff88;
+            animation: photoSuccess 0.6s ease;
+        }
+
+        @keyframes photoSuccess {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); box-shadow: 0 0 60px rgba(0, 255, 136, 0.8); }
+            100% { transform: scale(1); }
         }
 
         .photo-placeholder {
             color: #8899a6;
             font-size: 0.8rem;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .photo-area:hover .photo-placeholder {
+            color: #00d4ff;
+            transform: scale(1.1);
         }
 
         .photo-area input[type="file"] {
@@ -163,9 +211,38 @@
             cursor: pointer;
         }
 
+        .photo-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            animation: photoAppear 0.5s ease;
+        }
+
+        @keyframes photoAppear {
+            from { transform: scale(0.8); opacity: 0; filter: blur(10px); }
+            to { transform: scale(1); opacity: 1; filter: blur(0); }
+        }
+
+        /* Name Section with Animation */
         .name-section {
             text-align: center;
             width: 100%;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: nameSlideIn 0.8s ease 0.2s both;
+        }
+
+        @keyframes nameSlideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .name-section:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-3px);
         }
 
         .name-section h1 {
@@ -173,6 +250,13 @@
             font-size: 1.4rem;
             margin-bottom: 8px;
             line-height: 1.3;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            to { text-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3); }
         }
 
         .name-section p {
@@ -183,7 +267,7 @@
             font-weight: 600;
         }
 
-        /* Info Sections */
+        /* Info Sections with Staggered Animations */
         .info-sections {
             width: 100%;
             display: flex;
@@ -192,16 +276,50 @@
         }
 
         .info-box {
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(0, 212, 255, 0.08);
             border-left: 3px solid #00d4ff;
             border-radius: 0 10px 10px 0;
             padding: 18px 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: boxSlideIn 0.6s ease both;
+        }
+
+        .info-box:nth-child(1) { animation-delay: 0.3s; }
+        .info-box:nth-child(2) { animation-delay: 0.4s; }
+        .info-box:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes boxSlideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .info-box:hover::before {
+            transform: translateX(100%);
+        }
+
+        .info-box:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-left-color: #ffd700;
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
         }
 
         .info-box:active {
-            background: rgba(0, 212, 255, 0.2);
             transform: scale(0.98);
         }
 
@@ -211,6 +329,11 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .info-box:hover h3 {
+            color: #ffd700;
         }
 
         .info-box p {
@@ -219,7 +342,24 @@
             line-height: 1.4;
         }
 
-        /* Content Panel - Mobile Full Screen */
+        /* Click Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.4);
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Content Panel with Animation */
         .content-panel {
             display: none;
             position: fixed;
@@ -231,16 +371,25 @@
             z-index: 100;
             overflow-y: auto;
             padding: 20px;
-            animation: slideUp 0.3s ease;
         }
 
         .content-panel.active {
             display: block;
+            animation: panelSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @keyframes slideUp {
+        @keyframes panelSlideUp {
             from { transform: translateY(100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        .content-panel.closing {
+            animation: panelSlideDown 0.3s ease forwards;
+        }
+
+        @keyframes panelSlideDown {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(100%); opacity: 0; }
         }
 
         .panel-header {
@@ -253,24 +402,42 @@
             align-items: center;
             gap: 10px;
             padding-right: 50px;
+            animation: headerFadeIn 0.5s ease 0.1s both;
+        }
+
+        @keyframes headerFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .panel-header::before {
             content: '◆';
             color: #00d4ff;
+            animation: diamondSpin 2s linear infinite;
+        }
+
+        @keyframes diamondSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .panel-content {
             color: #c0d0e0;
             font-size: 0.95rem;
             line-height: 1.8;
+            animation: contentFadeIn 0.5s ease 0.2s both;
+        }
+
+        @keyframes contentFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .panel-content p {
             margin-bottom: 15px;
         }
 
-        /* Contact Section in Panel */
+        /* Contact Section */
         .contact-links {
             display: flex;
             flex-direction: column;
@@ -286,6 +453,22 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: all 0.3s ease;
+            animation: contactItemIn 0.5s ease both;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 0.3s; }
+        .contact-item:nth-child(2) { animation-delay: 0.4s; }
+
+        @keyframes contactItemIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateX(10px);
+            border-color: #ffd700;
         }
 
         .contact-icon {
@@ -298,6 +481,12 @@
             justify-content: center;
             font-size: 1.3rem;
             flex-shrink: 0;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 212, 255, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); }
         }
 
         .contact-text h4 {
@@ -311,6 +500,11 @@
             text-decoration: none;
             font-size: 0.85rem;
             word-break: break-all;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: #ffd700;
         }
 
         /* Close Button */
@@ -330,6 +524,35 @@
             justify-content: center;
             cursor: pointer;
             z-index: 101;
+            transition: all 0.3s ease;
+            animation: btnBounceIn 0.5s ease 0.3s both;
+        }
+
+        @keyframes btnBounceIn {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .close-btn:hover {
+            background: #00d4ff;
+            color: #0a0e27;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Footer */
@@ -366,7 +589,7 @@
                 width: 500px;
                 max-width: 500px;
                 padding: 40px;
-                transition: all 0.6s ease;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .center-card.moved {
@@ -394,24 +617,10 @@
             .photo-area {
                 width: 180px;
                 height: 180px;
-                cursor: pointer;
-            }
-
-            .name-section {
-                cursor: pointer;
             }
 
             .name-section h1 {
                 font-size: 1.8rem;
-            }
-
-            .name-section p {
-                font-size: 1rem;
-            }
-
-            .info-box:hover {
-                background: rgba(0, 212, 255, 0.2);
-                transform: translateX(10px);
             }
 
             .content-panel {
@@ -423,7 +632,6 @@
                 height: calc(100vh - 160px);
                 border-radius: 20px;
                 border: 2px solid #00d4ff;
-                background: rgba(10, 15, 30, 0.98);
                 display: block;
                 opacity: 0;
                 transform: translateX(-30px);
@@ -441,23 +649,6 @@
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                width: 40px;
-                height: 40px;
-            }
-
-            .close-btn:hover {
-                background: #00d4ff;
-                color: #0a0e27;
-                transform: rotate(90deg);
-            }
-
-            .panel-header {
-                font-size: 2rem;
-                padding-right: 0;
-            }
-
-            .panel-content {
-                font-size: 1.05rem;
             }
         }
     </style>
@@ -482,9 +673,9 @@
     <div class="main-container">
         <!-- Profile Card -->
         <div class="center-card" id="profileCard">
-            <div class="photo-area" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
-                <span class="photo-placeholder">Add Photo</span>
-                <input type="file" id="fileInput" accept="image/*" onchange="previewImage(this)">
+            <div class="photo-area" id="photoArea" onclick="handlePhotoClick(event)">
+                <span class="photo-placeholder" id="photoPlaceholder">Add Photo</span>
+                <input type="file" id="fileInput" accept="image/*" onchange="handlePhotoUpload(this)" style="display: none;">
             </div>
             
             <div class="name-section" onclick="moveToCorner()">
@@ -493,17 +684,17 @@
             </div>
             
             <div class="info-sections">
-                <div class="info-box" onclick="showSection('whoiam')">
+                <div class="info-box" onclick="showSection('whoiam', this)">
                     <h3>Who I Am</h3>
                     <p>Click to learn more about me</p>
                 </div>
                 
-                <div class="info-box" onclick="showSection('personal')">
+                <div class="info-box" onclick="showSection('personal', this)">
                     <h3>Personal Information</h3>
                     <p>Click to view my background</p>
                 </div>
                 
-                <div class="info-box" onclick="showSection('strengths')">
+                <div class="info-box" onclick="showSection('strengths', this)">
                     <h3>Strengths</h3>
                     <p>Click to see my skills</p>
                 </div>
@@ -520,123 +711,9 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <span>© 2026 Marcy Angelo M. Villegas. All rights reserved.</span>
+        <span>© 2024 Marcy Angelo M. Villegas. All rights reserved.</span>
     </footer>
 
     <script>
-        const isMobile = () => window.innerWidth <= 768;
-        let cardMoved = false;
-
-        const sectionData = {
-            'whoiam': {
-                title: 'Who I Am',
-                content: '<p>I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences. I value continuous learning, creativity, and attention to detail. I am currently developing my expertise in frontend development while building projects that enhance both my technical and problem-solving skills.</p>'
-            },
-            'personal': {
-                title: 'Personal Information',
-                content: '<p>I am Marcy Angelo M. Villegas, a passionate Frontend Developer focused on creating clean, responsive, and user-friendly web interfaces. I have a strong interest in modern web technologies and continuously strive to improve my skills in building functional and visually appealing websites. I am dedicated to delivering quality work, learning new tools, and adapting to different challenges in the field of web development.</p>'
-            },
-            'strengths': {
-                title: 'My Strengths',
-                content: '<p>I am a detail-oriented and adaptable individual with a strong problem-solving mindset. I am a fast learner who is eager to continuously improve my skills in frontend development. I can work both independently and collaboratively, and I am committed to delivering quality work while staying open to learning new technologies and ideas.</p>'
-            },
-            'contact': {
-                title: 'Contact Me',
-                content: `
-                    <p>Get in touch with me through the following channels:</p>
-                    <div class="contact-links">
-                        <div class="contact-item">
-                            <div class="contact-icon">📧</div>
-                            <div class="contact-text">
-                                <h4>Email</h4>
-                                <a href="mailto:mmamvillegas@tip.edu.ph">mmamvillegas@tip.edu.ph</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">💻</div>
-                            <div class="contact-text">
-                                <h4>GitHub</h4>
-                                <a href="https://github.com/marcygelo1/portfolio" target="_blank">github.com/marcygelo1/portfolio</a>
-                            </div>
-                        </div>
-                    </div>
-                `
-            }
-        };
-
-        function showHome() {
-            const card = document.getElementById('profileCard');
-            const panel = document.getElementById('contentPanel');
-            
-            panel.classList.remove('active');
-            
-            if (!isMobile()) {
-                card.classList.remove('moved');
-                cardMoved = false;
-            }
-        }
-
-        function showSection(section) {
-            const card = document.getElementById('profileCard');
-            const panel = document.getElementById('contentPanel');
-            const title = document.getElementById('panelTitle');
-            const content = document.getElementById('panelContent');
-            
-            const data = sectionData[section];
-            title.textContent = data.title;
-            content.innerHTML = data.content;
-            
-            panel.classList.add('active');
-            
-            if (!isMobile() && !cardMoved) {
-                card.classList.add('moved');
-                cardMoved = true;
-            }
-        }
-
-        function showContact() {
-            showSection('contact');
-        }
-
-        function moveToCorner() {
-            if (isMobile() || cardMoved) return;
-            
-            const card = document.getElementById('profileCard');
-            card.classList.add('moved');
-            cardMoved = true;
-        }
-
-        function closePanel() {
-            const panel = document.getElementById('contentPanel');
-            const card = document.getElementById('profileCard');
-            
-            panel.classList.remove('active');
-            
-            if (!isMobile()) {
-                card.classList.remove('moved');
-                cardMoved = false;
-            }
-        }
-
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const placeholder = document.querySelector('.photo-placeholder');
-                    placeholder.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-                    placeholder.style.padding = '0';
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Handle resize
-        window.addEventListener('resize', () => {
-            if (!isMobile() && cardMoved) {
-                const card = document.getElementById('profileCard');
-                card.classList.add('moved');
-            }
-        });
-    </script>
-</body>
-</html>
+        // Pre-loaded photo (Base64 of your image)
+        const PRELOADED_PHOTO = '/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAQAAwADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQBAgUABv/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/9oADAMBAAIQAxAAAAH5m6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6j1LqPUuo9S6
