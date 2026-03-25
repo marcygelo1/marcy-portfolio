@@ -157,13 +157,7 @@
             flex-shrink: 0;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: photoPulse 3s ease-in-out infinite, photoBounceIn 0.6s ease;
-        }
-
-        @keyframes photoBounceIn {
-            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
-            60% { transform: scale(1.1) rotate(10deg); }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            animation: photoPulse 3s ease-in-out infinite;
         }
 
         @keyframes photoPulse {
@@ -196,19 +190,12 @@
             font-size: 0.8rem;
             text-align: center;
             transition: all 0.3s ease;
+            pointer-events: none;
         }
 
         .photo-area:hover .photo-placeholder {
             color: #00d4ff;
             transform: scale(1.1);
-        }
-
-        .photo-area input[type="file"] {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
         }
 
         .photo-preview {
@@ -222,6 +209,29 @@
         @keyframes photoAppear {
             from { transform: scale(0.8); opacity: 0; filter: blur(10px); }
             to { transform: scale(1); opacity: 1; filter: blur(0); }
+        }
+
+        /* Hidden file input */
+        #fileInput {
+            position: absolute;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Name Section with Animation */
@@ -550,21 +560,6 @@
             transform: rotate(90deg) scale(1.1);
         }
 
-        /* Loading Spinner */
-        .loading-spinner {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(0, 212, 255, 0.3);
-            border-top-color: #00d4ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         /* Footer */
         .footer {
             position: fixed;
@@ -683,10 +678,13 @@
     <div class="main-container">
         <!-- Profile Card -->
         <div class="center-card" id="profileCard">
-            <div class="photo-area" id="photoArea" onclick="handlePhotoClick(event)">
+            <!-- Photo Area - Fixed click handler -->
+            <div class="photo-area" id="photoArea" onclick="triggerFileInput(event)">
                 <span class="photo-placeholder" id="photoPlaceholder">Add Photo</span>
-                <input type="file" id="fileInput" accept="image/*" onchange="handlePhotoUpload(this)" style="display: none;">
             </div>
+            
+            <!-- Hidden File Input - Outside the photo area -->
+            <input type="file" id="fileInput" accept="image/*" onchange="handlePhotoUpload(this)">
             
             <div class="name-section" onclick="moveToCorner()">
                 <h1>Marcy Angelo M. Villegas</h1>
@@ -775,6 +773,87 @@
             }
         });
 
+        // Trigger file input - Fixed version
+        function triggerFileInput(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Create ripple effect
+            createRipple(event, document.getElementById('photoArea'));
+            
+            // Small delay for visual feedback
+            setTimeout(() => {
+                const fileInput = document.getElementById('fileInput');
+                if (fileInput) {
+                    fileInput.click();
+                }
+            }, 150);
+        }
+
+        // Handle photo upload - Fixed version
+        function handlePhotoUpload(input) {
+            console.log('File input changed:', input.files);
+            
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                console.log('File selected:', file.name, file.type, file.size);
+                
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image file (JPG, PNG, etc.)');
+                    return;
+                }
+                
+                // Show loading
+                const placeholder = document.getElementById('photoPlaceholder');
+                placeholder.innerHTML = '<div class="loading-spinner"></div>';
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    console.log('File loaded successfully');
+                    const photoData = e.target.result;
+                    
+                    // Save to localStorage
+                    try {
+                        localStorage.setItem('profilePhoto', photoData);
+                        console.log('Photo saved to localStorage');
+                    } catch (err) {
+                        console.error('Error saving to localStorage:', err);
+                        alert('Photo is too large. Please use a smaller image.');
+                        return;
+                    }
+                    
+                    // Display photo
+                    displayPhoto(photoData);
+                };
+                
+                reader.onerror = function(err) {
+                    console.error('FileReader error:', err);
+                    alert('Error reading file. Please try again.');
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                console.log('No file selected');
+            }
+            
+            // Reset input so same file can be selected again
+            input.value = '';
+        }
+
+        // Display photo
+        function displayPhoto(photoData) {
+            const photoArea = document.getElementById('photoArea');
+            const placeholder = document.getElementById('photoPlaceholder');
+            
+            placeholder.innerHTML = `<img src="${photoData}" class="photo-preview" alt="Profile Photo">`;
+            placeholder.style.padding = '0';
+            photoArea.classList.add('has-photo');
+            
+            console.log('Photo displayed successfully');
+        }
+
         // Create ripple effect
         function createRipple(e, element) {
             const ripple = document.createElement('span');
@@ -791,56 +870,6 @@
             element.appendChild(ripple);
             
             setTimeout(() => ripple.remove(), 600);
-        }
-
-        // Handle photo area click
-        function handlePhotoClick(event) {
-            // Create ripple effect
-            createRipple(event, document.getElementById('photoArea'));
-            
-            // Trigger file input
-            setTimeout(() => {
-                document.getElementById('fileInput').click();
-            }, 200);
-        }
-
-        // Handle photo upload
-        function handlePhotoUpload(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                
-                // Show loading spinner
-                const placeholder = document.getElementById('photoPlaceholder');
-                placeholder.innerHTML = '<div class="loading-spinner"></div>';
-                
-                reader.onload = function(e) {
-                    const photoData = e.target.result;
-                    
-                    // Save to localStorage
-                    localStorage.setItem('profilePhoto', photoData);
-                    
-                    // Display photo
-                    displayPhoto(photoData);
-                };
-                
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Display photo
-        function displayPhoto(photoData) {
-            const photoArea = document.getElementById('photoArea');
-            const placeholder = document.getElementById('photoPlaceholder');
-            
-            placeholder.innerHTML = `<img src="${photoData}" class="photo-preview" alt="Profile Photo">`;
-            placeholder.style.padding = '0';
-            photoArea.classList.add('has-photo');
-            
-            // Remove the file input after photo is set
-            const fileInput = document.getElementById('fileInput');
-            if (fileInput) {
-                fileInput.style.display = 'none';
-            }
         }
 
         // Show section with animation
