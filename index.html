@@ -177,9 +177,12 @@
             padding: 20px 15px 100px;
             min-height: calc(100vh - 60px);
             z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Profile Card - Compact */
+        /* Profile Card - Always Centered */
         .center-card {
             width: 100%;
             max-width: 380px;
@@ -193,7 +196,9 @@
             align-items: center;
             gap: 18px;
             animation: cardFadeIn 0.8s ease;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 10;
         }
 
         @keyframes cardFadeIn {
@@ -201,19 +206,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .center-card.moved {
-            transform: scale(0.85) translateX(-30%);
+        /* Card shifts slightly when panel is open but stays visible */
+        .center-card.shifted {
+            transform: scale(0.9);
             opacity: 0.6;
+            filter: blur(2px);
         }
 
         @media (min-width: 769px) {
-            .center-card.moved {
-                position: fixed;
-                left: 5%;
-                top: 50%;
-                transform: translateY(-50%) scale(0.9);
-                opacity: 0.7;
-                max-width: 320px;
+            .center-card.shifted {
+                transform: translateX(-25%) scale(0.85);
+                opacity: 0.5;
             }
         }
 
@@ -390,43 +393,44 @@
         /* Content Panel - Smoother, Cleaner, Softer */
         .content-panel {
             position: fixed;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 110px);
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
             background: rgba(5, 5, 16, 0.98);
             z-index: 100;
             overflow-y: auto;
-            padding: 20px;
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
             opacity: 0;
             visibility: hidden;
-            transform: scale(0.95) translateY(10px);
+            transform: translate(-50%, -45%) scale(0.95);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .content-panel.active {
             opacity: 1;
             visibility: visible;
-            transform: scale(1) translateY(0);
+            transform: translate(-50%, -50%) scale(1);
             pointer-events: all;
         }
 
-        @media (min-width: 769px) {
+        @media (max-width: 768px) {
             .content-panel {
+                width: 95%;
+                max-height: 70vh;
+                top: auto;
+                bottom: 80px;
                 left: 50%;
-                top: 50%;
-                transform: translate(-50%, -45%) scale(0.95);
-                width: 90%;
-                max-width: 600px;
-                height: auto;
-                max-height: 80vh;
-                border-radius: 20px;
-                border: 2px solid rgba(0, 212, 255, 0.3);
+                transform: translate(-50%, 20px) scale(0.95);
             }
 
             .content-panel.active {
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, 0) scale(1);
             }
         }
 
@@ -523,9 +527,9 @@
         }
 
         .close-btn {
-            position: fixed;
-            top: 70px;
-            right: 15px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
             width: 42px;
             height: 42px;
             background: rgba(0, 212, 255, 0.2);
@@ -553,14 +557,6 @@
             background: #00d4ff;
             color: #0a0e27;
             transform: rotate(90deg);
-        }
-
-        @media (min-width: 769px) {
-            .close-btn {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-            }
         }
 
         /* Chat Assistant (Bottom Right) */
@@ -914,7 +910,6 @@
     <script>
         // Check if mobile
         const isMobile = () => window.innerWidth <= 768;
-        let cardMoved = false;
 
         // Logo text rotator with glitch effect
         const logoTexts = [
@@ -1043,15 +1038,15 @@
             photoArea.onclick = null;
         }
 
-        // Show section with animation
+        // Show section with animation - Card stays centered but shifts slightly
         function showSection(section, element) {
             // Add clicking animation
             element.classList.add('clicking');
             setTimeout(() => element.classList.remove('clicking'), 400);
 
-            if (!isMobile() && !cardMoved) {
-                moveToCorner();
-            }
+            // Shift card slightly to indicate focus change, but keep it centered/visible
+            const card = document.getElementById('profileCard');
+            card.classList.add('shifted');
             
             const panel = document.getElementById('contentPanel');
             const title = document.getElementById('panelTitle');
@@ -1066,9 +1061,9 @@
 
         // Show contact
         function showContact() {
-            if (!isMobile() && !cardMoved) {
-                moveToCorner();
-            }
+            // Shift card slightly
+            const card = document.getElementById('profileCard');
+            card.classList.add('shifted');
             
             const panel = document.getElementById('contentPanel');
             const title = document.getElementById('panelTitle');
@@ -1081,29 +1076,30 @@
             panel.classList.add('active');
         }
 
-        // Move card to corner
-        function moveToCorner() {
-            if (isMobile() || cardMoved) return;
-            document.getElementById('profileCard').classList.add('moved');
-            cardMoved = true;
-        }
-
-        // Show home
+        // Show home - Return card to center
         function showHome() {
             const card = document.getElementById('profileCard');
             const panel = document.getElementById('contentPanel');
             
             panel.classList.remove('active');
             
-            if (!isMobile()) {
-                card.classList.remove('moved');
-                cardMoved = false;
-            }
+            // Remove shifted class to return card to center
+            setTimeout(() => {
+                card.classList.remove('shifted');
+            }, 100);
         }
 
-        // Close panel
+        // Close panel - Return card to center
         function closePanel() {
-            document.getElementById('contentPanel').classList.remove('active');
+            const card = document.getElementById('profileCard');
+            const panel = document.getElementById('contentPanel');
+            
+            panel.classList.remove('active');
+            
+            // Return card to center with smooth animation
+            setTimeout(() => {
+                card.classList.remove('shifted');
+            }, 100);
         }
 
         // ==================== CHAT ASSISTANT ====================
@@ -1179,10 +1175,21 @@
             if (event.key === 'Enter') sendAssistantMessage();
         }
 
-        // Handle resize
-        window.addEventListener('resize', () => {
-            if (!isMobile() && cardMoved) {
-                document.getElementById('profileCard').classList.add('moved');
+        // Close panel when clicking outside
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('contentPanel');
+            const card = document.getElementById('profileCard');
+            
+            // If panel is active and click is outside panel and not on info boxes
+            if (panel.classList.contains('active')) {
+                const isClickOnInfoBox = event.target.closest('.info-box');
+                const isClickOnNav = event.target.closest('.nav-links');
+                const isClickInsidePanel = event.target.closest('.content-panel');
+                const isClickOnCloseBtn = event.target.closest('.close-btn');
+                
+                if (!isClickInsidePanel && !isClickOnInfoBox && !isClickOnNav && !isClickOnCloseBtn) {
+                    closePanel();
+                }
             }
         });
     </script>
