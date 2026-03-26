@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills | Marcy Angelo</title>
+    <title>Skills | Marcy Angelo M. Villegas</title>
     <style>
         * {
             margin: 0;
@@ -28,7 +28,6 @@
             color: var(--text-primary);
         }
 
-        /* Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -62,7 +61,6 @@
             left: -150px;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -116,7 +114,6 @@
             width: 100%;
         }
 
-        /* Main Content */
         .main-content {
             position: relative;
             z-index: 10;
@@ -146,7 +143,6 @@
             text-transform: uppercase;
         }
 
-        /* Skills Grid */
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -157,7 +153,7 @@
             background: var(--panel-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
             border-radius: 15px;
-            padding: 30px;
+            padding: 35px;
             transition: all 0.3s ease;
         }
 
@@ -220,47 +216,6 @@
             box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
-        /* Strengths Section */
-        .strengths-section {
-            margin-top: 50px;
-            background: var(--panel-bg);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
-            padding: 40px;
-        }
-
-        .strengths-title {
-            font-size: 1.3rem;
-            color: var(--neon-gold);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .strengths-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .strength-item {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .strength-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .strength-name {
-            color: var(--neon-cyan);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -284,7 +239,7 @@
             }
 
             .nav-links {
-                gap: 20px;
+                gap: 18px;
             }
 
             .main-content {
@@ -298,38 +253,40 @@
             .skills-container {
                 grid-template-columns: 1fr;
             }
+
+            .skill-category {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background -->
     <div class="bg-animation">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
     </div>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="skills.html" class="active">Skills</a></li>
+            <li><a href="resume.html">Resume</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
         <a href="index.html" class="back-btn">← Back to Home</a>
         
         <div class="page-header">
             <h1 class="page-title">Skills & Expertise</h1>
-            <p class="page-subtitle">Technologies & Strengths</p>
+            <p class="page-subtitle">Technologies I Work With</p>
         </div>
 
         <div class="skills-container">
             <div class="skill-category">
-                <h2 class="category-title">Frontend Core</h2>
+                <h2 class="category-title">Core Technologies</h2>
                 <div class="skill-list">
                     <div class="skill-item">
                         <span class="skill-name">HTML5</span>
@@ -365,10 +322,20 @@
             </div>
 
             <div class="skill-category">
-                <h2 class="category-title">Design & Tools</h2>
+                <h2 class="category-title">Design & Development</h2>
                 <div class="skill-list">
                     <div class="skill-item">
-                        <span class="skill-name">Responsive Design</span>
+                        <span class="skill-name">Responsive Web Design</span>
+                        <div class="skill-level">
+                            <span class="level-dot active"></span>
+                            <span class="level-dot active"></span>
+                            <span class="level-dot active"></span>
+                            <span class="level-dot active"></span>
+                            <span class="level-dot"></span>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Basic UI/UX Principles</span>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -387,24 +354,14 @@
                             <span class="level-dot"></span>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Git/GitHub</span>
-                        <div class="skill-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="skill-category">
-                <h2 class="category-title">Soft Skills</h2>
+                <h2 class="category-title">Professional Skills</h2>
                 <div class="skill-list">
                     <div class="skill-item">
-                        <span class="skill-name">Problem Solving</span>
+                        <span class="skill-name">Problem-Solving</span>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -414,7 +371,7 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">Fast Learner</span>
+                        <span class="skill-name">Critical Thinking</span>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -424,37 +381,15 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">Team Collaboration</span>
+                        <span class="skill-name">Continuous Learning</span>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
+                            <span class="level-dot active"></span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="strengths-section">
-            <h2 class="strengths-title">My Strengths</h2>
-            <div class="strengths-grid">
-                <div class="strength-item">
-                    <div class="strength-icon">🎯</div>
-                    <div class="strength-name">Detail-Oriented</div>
-                </div>
-                <div class="strength-item">
-                    <div class="strength-icon">⚡</div>
-                    <div class="strength-name">Adaptable</div>
-                </div>
-                <div class="strength-item">
-                    <div class="strength-icon">🔍</div>
-                    <div class="strength-name">Problem Solver</div>
-                </div>
-                <div class="strength-item">
-                    <div class="strength-icon">📚</div>
-                    <div class="strength-name">Fast Learner</div>
                 </div>
             </div>
         </div>
