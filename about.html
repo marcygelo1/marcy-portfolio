@@ -20,13 +20,35 @@
             --text-secondary: #8899a6;
         }
 
-        html, body {
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
             min-height: 100vh;
             width: 100%;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            line-height: 1.6;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-cyan);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-gold);
         }
 
         .bg-animation {
@@ -34,7 +56,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: 0;
             pointer-events: none;
         }
@@ -67,11 +89,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 70px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding: 0 50px;
+            padding: 0 60px;
             z-index: 1000;
             background: linear-gradient(to bottom, rgba(5, 5, 16, 0.95), transparent);
             animation: slideDown 0.6s ease;
@@ -84,16 +106,16 @@
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 50px;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.3s ease;
             position: relative;
@@ -124,13 +146,54 @@
         .main-content {
             position: relative;
             z-index: 10;
-            max-width: 1000px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 30px 80px;
+            padding: 140px 60px 100px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--neon-gold);
+            transform: translateX(-5px);
         }
 
         .page-header {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Profile Hero Section */
+        .profile-hero {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
             animation: fadeInUp 0.8s ease;
         }
 
@@ -139,73 +202,59 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--neon-gold);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .page-subtitle {
-            color: var(--neon-cyan);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* Profile Section with Photo */
-        .profile-section {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 40px;
-            background: var(--panel-bg);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-            transition: all 0.3s ease;
-        }
-
-        .profile-section:hover {
-            border-color: rgba(0, 212, 255, 0.4);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.1);
-        }
-
         .profile-image-container {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        .profile-image-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
         .profile-image {
-            width: 200px;
-            height: 200px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
-            border: 3px solid var(--neon-cyan);
+            border: 4px solid var(--neon-cyan);
             object-fit: cover;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
             animation: pulse 3s ease-in-out infinite;
-            margin-bottom: 20px;
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(0, 212, 255, 0.5); }
+            0%, 100% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 0 60px rgba(0, 212, 255, 0.5); }
+        }
+
+        .image-ring {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 2px dashed rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .profile-badge {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 10px;
+            padding: 12px 24px;
             background: rgba(0, 255, 136, 0.1);
             border: 1px solid rgba(0, 255, 136, 0.3);
-            border-radius: 20px;
+            border-radius: 30px;
             color: #00ff88;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .profile-badge::before {
@@ -226,72 +275,28 @@
         }
 
         .profile-name {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
 
         .profile-role {
             color: var(--neon-gold);
-            font-size: 1rem;
-            letter-spacing: 2px;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .profile-bio {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.9;
-        }
-
-        .profile-bio p {
-            margin-bottom: 15px;
-        }
-
-        /* Content Sections */
-        .content-section {
-            background: var(--panel-bg);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
-            padding: 35px;
             margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease;
-            transition: all 0.3s ease;
         }
 
-        .content-section:nth-child(2) { animation-delay: 0.3s; }
-        .content-section:nth-child(3) { animation-delay: 0.4s; }
-        .content-section:nth-child(4) { animation-delay: 0.5s; }
-
-        .content-section:hover {
-            border-color: rgba(0, 212, 255, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            color: var(--neon-cyan);
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title::before {
-            content: '◆';
-            color: var(--neon-gold);
-            font-size: 0.8rem;
-        }
-
-        .section-content {
+        .profile-intro {
             color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.9;
+            font-size: 1.15rem;
+            line-height: 2;
         }
 
-        .section-content p {
-            margin-bottom: 18px;
+        .profile-intro p {
+            margin-bottom: 20px;
         }
 
         .highlight {
@@ -299,158 +304,229 @@
             font-weight: 500;
         }
 
-        /* Certifications Grid */
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+        /* Content Sections */
+        .content-section {
+            width: 100%;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
         }
 
-        .cert-item {
+        .content-section:nth-child(3) { animation-delay: 0.1s; }
+        .content-section:nth-child(4) { animation-delay: 0.2s; }
+
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px;
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--neon-cyan);
             transition: all 0.3s ease;
         }
 
-        .cert-item:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: var(--neon-cyan);
-            transform: translateY(-3px);
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        .cert-icon {
-            font-size: 1.5rem;
-        }
-
-        .cert-text {
-            font-size: 0.9rem;
+        .biography-content {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px;
+            line-height: 2;
+            font-size: 1.1rem;
             color: var(--text-secondary);
         }
 
-        .cert-text strong {
-            color: var(--neon-gold);
-            display: block;
-            font-size: 0.85rem;
-            margin-bottom: 3px;
+        .biography-content p {
+            margin-bottom: 25px;
         }
 
-        /* Projects Grid */
-        .projects-grid {
+        .biography-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Certifications */
+        .certifications-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 25px;
         }
 
-        .project-card {
-            background: rgba(0, 212, 255, 0.05);
+        .cert-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 25px;
+            background: var(--panel-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .cert-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--neon-gold);
             border-radius: 12px;
-            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .cert-info h4 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .cert-info p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .project-card {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
             transition: all 0.3s ease;
         }
 
         .project-card:hover {
-            background: rgba(0, 212, 255, 0.1);
             border-color: var(--neon-cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.15);
         }
 
         .project-icon {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--neon-gold);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2rem;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-icon {
+            background: var(--neon-gold);
+            color: var(--dark-bg);
+            transform: rotate(5deg);
         }
 
         .project-title {
+            font-size: 1.4rem;
             color: var(--neon-gold);
-            font-size: 1.2rem;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .project-desc {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
         }
 
         .project-tech {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .tech-tag {
-            padding: 5px 12px;
+            padding: 8px 16px;
             background: rgba(0, 212, 255, 0.1);
             border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 20px;
-            font-size: 0.75rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
             color: var(--neon-cyan);
         }
 
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--neon-cyan);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
+        .footer {
+            width: 100%;
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
         }
 
-        .back-btn:hover {
-            color: var(--neon-gold);
-            transform: translateX(-5px);
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 968px) {
+            .profile-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 220px;
+                height: 220px;
+            }
+
+            .profile-name {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 768px) {
             .navbar {
                 justify-content: center;
                 padding: 0 20px;
+                height: 70px;
             }
 
             .nav-links {
-                gap: 18px;
+                gap: 20px;
             }
 
             .main-content {
-                padding: 100px 20px 60px;
+                padding: 120px 25px 80px;
             }
 
             .page-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
-            .profile-section {
-                grid-template-columns: 1fr;
-                text-align: center;
+            .biography-content {
                 padding: 30px;
             }
 
-            .profile-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .profile-name {
-                font-size: 1.5rem;
-            }
-
-            .content-section {
-                padding: 25px;
-            }
-
-            .certifications-grid {
-                grid-template-columns: 1fr;
-            }
-
+            .certifications-grid,
             .projects-grid {
                 grid-template-columns: 1fr;
             }
@@ -481,26 +557,32 @@
             <p class="page-subtitle">Academic Biography & Projects</p>
         </div>
 
-        <!-- Profile Section with Photo -->
-        <div class="profile-section">
+        <!-- Profile Hero -->
+        <div class="profile-hero">
             <div class="profile-image-container">
-                <img src="https://via.placeholder.com/200/00d4ff/ffffff?text=MA" alt="Marcy Angelo M. Villegas" class="profile-image" id="profilePhoto">
+                <div class="profile-image-wrapper">
+                    <div class="image-ring"></div>
+                    <img src="https://via.placeholder.com/280/00d4ff/ffffff?text=MA" alt="Marcy Angelo M. Villegas" class="profile-image" id="profilePhoto">
+                </div>
                 <div class="profile-badge">Available for Work</div>
             </div>
             <div class="profile-content">
                 <h2 class="profile-name">Marcy Angelo M. Villegas</h2>
                 <p class="profile-role">Frontend Developer & Computer Engineering Student</p>
-                <div class="profile-bio">
-                    <p>An aspiring developer with a passion for creating clean, responsive, and user-friendly web interfaces. I enjoy combining creativity and technical skills to build modern digital experiences.</p>
+                <div class="profile-intro">
+                    <p>An aspiring developer with a passion for creating <span class="highlight">clean, responsive, and user-friendly</span> web interfaces. I enjoy combining creativity and technical skills to build modern digital experiences.</p>
                     <p>Currently pursuing <span class="highlight">BSCpE at TIP</span> with certifications in <span class="highlight">Computer Networks</span> and <span class="highlight">Cybersecurity</span>.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Academic Biography Section -->
-        <div class="content-section">
-            <h2 class="section-title">Academic Biography</h2>
-            <div class="section-content">
+        <!-- Academic Biography -->
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">📖</div>
+                <h2 class="section-title">Academic Biography</h2>
+            </div>
+            <div class="biography-content">
                 <p>I am <span class="highlight">Marcy Angelo M. Villegas</span>, a graduate of <span class="highlight">Espiritu Santo Parochial School (ESPS)</span>. I am currently pursuing my studies at the <span class="highlight">Technological Institute of the Philippines (TIP)</span>, taking up the <span class="highlight">Bachelor of Science in Computer Engineering (BSCpE)</span> program. I chose this field because I discovered a strong passion for technology, problem-solving, and the continuous development of innovative digital solutions.</p>
                 
                 <p>Throughout my academic journey, I have built a solid foundation in both technical and analytical skills. I have successfully earned certifications in <span class="highlight">Computer Networks 1, 2, and 3</span>, as well as <span class="highlight">Cybersecurity 1</span>, which strengthened my understanding of network systems, security principles, and modern computing environments. Additionally, I have completed training in <span class="highlight">Basic Occupational Safety and Health (BOSH)</span>, equipping me with knowledge of workplace safety standards and responsible professional practices.</p>
@@ -509,53 +591,59 @@
                 
                 <p>I am a dedicated and motivated learner who values growth, adaptability, and continuous improvement. My goal is to further develop my expertise in both software and hardware systems, while contributing to innovative projects that make a meaningful impact in the field of technology.</p>
             </div>
-        </div>
+        </section>
 
-        <!-- Certifications Section -->
-        <div class="content-section">
-            <h2 class="section-title">Certifications & Training</h2>
+        <!-- Certifications -->
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">🏆</div>
+                <h2 class="section-title">Certifications</h2>
+            </div>
             <div class="certifications-grid">
-                <div class="cert-item">
-                    <span class="cert-icon">🌐</span>
-                    <div class="cert-text">
-                        <strong>Computer Networks 1</strong>
-                        Certified
+                <div class="cert-card">
+                    <div class="cert-icon">🌐</div>
+                    <div class="cert-info">
+                        <h4>Computer Networks 1</h4>
+                        <p>Certified</p>
                     </div>
                 </div>
-                <div class="cert-item">
-                    <span class="cert-icon">🌐</span>
-                    <div class="cert-text">
-                        <strong>Computer Networks 2</strong>
-                        Certified
+                <div class="cert-card">
+                    <div class="cert-icon">🌐</div>
+                    <div class="cert-info">
+                        <h4>Computer Networks 2</h4>
+                        <p>Certified</p>
                     </div>
                 </div>
-                <div class="cert-item">
-                    <span class="cert-icon">🌐</span>
-                    <div class="cert-text">
-                        <strong>Computer Networks 3</strong>
-                        Certified
+                <div class="cert-card">
+                    <div class="cert-icon">🌐</div>
+                    <div class="cert-info">
+                        <h4>Computer Networks 3</h4>
+                        <p>Certified</p>
                     </div>
                 </div>
-                <div class="cert-item">
-                    <span class="cert-icon">🔒</span>
-                    <div class="cert-text">
-                        <strong>Cybersecurity 1</strong>
-                        Certified
+                <div class="cert-card">
+                    <div class="cert-icon">🔒</div>
+                    <div class="cert-info">
+                        <h4>Cybersecurity 1</h4>
+                        <p>Certified</p>
                     </div>
                 </div>
-                <div class="cert-item">
-                    <span class="cert-icon">⚠️</span>
-                    <div class="cert-text">
-                        <strong>BOSH</strong>
-                        Safety Training
+                <div class="cert-card">
+                    <div class="cert-icon">⚠️</div>
+                    <div class="cert-info">
+                        <h4>BOSH</h4>
+                        <p>Safety Training</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Featured Projects Section -->
-        <div class="content-section">
-            <h2 class="section-title">Featured Projects</h2>
+        <!-- Projects -->
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">💼</div>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-icon">💻</div>
@@ -588,11 +676,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
+    <footer class="footer">
+        <p class="footer-text">© 2024 Marcy Angelo M. Villegas. All Rights Reserved.</p>
+    </footer>
+
     <script>
-        // Photo upload functionality
         document.getElementById('profilePhoto').addEventListener('click', function() {
             const input = document.createElement('input');
             input.type = 'file';
