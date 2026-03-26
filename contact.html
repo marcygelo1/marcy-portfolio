@@ -66,6 +66,12 @@
             padding: 0 50px;
             z-index: 1000;
             background: linear-gradient(to bottom, rgba(5, 5, 16, 0.95), transparent);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .nav-links {
@@ -118,6 +124,12 @@
         .page-header {
             margin-bottom: 50px;
             text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .page-title {
@@ -146,19 +158,23 @@
         .contact-card {
             background: var(--panel-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 40px;
             text-align: center;
             transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: block;
+            animation: fadeInUp 0.8s ease;
         }
+
+        .contact-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-card:nth-child(2) { animation-delay: 0.2s; }
 
         .contact-card:hover {
             border-color: var(--neon-cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.15);
         }
 
         .contact-icon-large {
@@ -179,12 +195,14 @@
             background: var(--neon-cyan);
             color: var(--dark-bg);
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+            transform: scale(1.1);
         }
 
         .contact-method {
             font-size: 1.2rem;
             color: var(--neon-gold);
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .contact-detail {
@@ -196,8 +214,14 @@
         .message-section {
             background: var(--panel-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 40px;
+            animation: fadeInUp 0.8s ease 0.3s both;
+            transition: all 0.3s ease;
+        }
+
+        .message-section:hover {
+            border-color: rgba(0, 212, 255, 0.4);
         }
 
         .section-title {
@@ -205,6 +229,14 @@
             color: var(--neon-cyan);
             margin-bottom: 30px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '✉';
         }
 
         .form-group {
@@ -212,7 +244,9 @@
         }
 
         .form-label {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: var(--text-secondary);
             font-size: 0.85rem;
             margin-bottom: 10px;
@@ -226,7 +260,7 @@
             padding: 15px 20px;
             background: rgba(0, 212, 255, 0.05);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text-primary);
             font-size: 1rem;
             font-family: inherit;
@@ -237,7 +271,7 @@
         .form-textarea:focus {
             outline: none;
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
         }
 
         .form-textarea {
@@ -247,7 +281,7 @@
 
         .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             background: transparent;
             border: 2px solid var(--neon-cyan);
             color: var(--neon-cyan);
@@ -257,13 +291,18 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 8px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .submit-btn:hover {
             background: var(--neon-cyan);
             color: var(--dark-bg);
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .back-btn {
@@ -306,6 +345,10 @@
 
             .contact-card {
                 padding: 30px;
+            }
+
+            .message-section {
+                padding: 25px;
             }
         }
     </style>
@@ -351,18 +394,20 @@
             <h2 class="section-title">Send a Message</h2>
             <form onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.');">
                 <div class="form-group">
-                    <label class="form-label">Your Name</label>
+                    <label class="form-label">👤 Your Name</label>
                     <input type="text" class="form-input" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Your Email</label>
+                    <label class="form-label">✉ Your Email</label>
                     <input type="email" class="form-input" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Message</label>
+                    <label class="form-label">💬 Message</label>
                     <textarea class="form-textarea" placeholder="Tell me about your project..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn">
+                    Send Message →
+                </button>
             </form>
         </div>
     </main>
