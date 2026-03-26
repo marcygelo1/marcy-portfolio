@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Marcy Angelo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --neon-cyan: #00d4ff;
+            --neon-gold: #ffd700;
+            --dark-bg: #050510;
+            --panel-bg: rgba(10, 15, 30, 0.95);
+            --text-primary: #e0e0e0;
+            --text-secondary: #8899a6;
+        }
+
+        html, body {
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--neon-cyan);
+            top: 10%;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-gold);
+            bottom: 10%;
+            right: -150px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 50px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(5, 5, 16, 0.95), transparent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--neon-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 30px 80px;
+        }
+
+        .page-header {
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neon-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '◆';
+            color: var(--neon-gold);
+            font-size: 0.8rem;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            color: var(--neon-gold);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            padding: 4px 12px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--neon-gold);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: center;
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .main-content {
+                padding: 100px 20px 60px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        
+        <div class="page-header">
+            <h1 class="page-title">About Me</h1>
+            <p class="page-subtitle">Who I Am & What I Do</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Who I Am</h2>
+            <div class="section-content">
+                <p>I am Marcy Angelo M. Villegas, a dedicated and motivated individual who enjoys turning ideas into interactive digital experiences. I value continuous learning, creativity, and attention to detail.</p>
+                <p>I am currently developing my expertise in frontend development while building projects that enhance both my technical and problem-solving skills. My passion lies in creating clean, responsive, and user-friendly web interfaces that leave lasting impressions.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Personal Information</h2>
+            <div class="section-content">
+                <p>I am a passionate Frontend Developer focused on modern web technologies. I continuously strive to improve my skills in building functional and visually appealing websites.</p>
+                <p>I am dedicated to delivering quality work, learning new tools, and adapting to different challenges in the field of web development. Currently studying at Technological Institute of the Philippines (TIP).</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Cyberpunk Portfolio</h3>
+                    <p class="project-desc">Interactive portfolio with dynamic animations and virtual assistant.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Chat Interface</h3>
+                    <p class="project-desc">Real-time chat system with cyberpunk aesthetic and wedding accents.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">UI/UX</span>
+                        <span class="tech-tag">Animation</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Virtual Assistant</h3>
+                    <p class="project-desc">AI-like chatbot with contextual responses and smooth interactions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">DOM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
