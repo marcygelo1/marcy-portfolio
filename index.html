@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcy Angelo | Frontend Developer</title>
+    <title>Marcy Angelo M. Villegas | Frontend Developer</title>
     <style>
         * {
             margin: 0;
@@ -28,7 +28,6 @@
             overflow: hidden;
         }
 
-        /* Background Animation */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -79,7 +78,6 @@
             background-size: 50px 50px;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -133,7 +131,6 @@
             width: 100%;
         }
 
-        /* Main Content */
         .main-content {
             position: relative;
             z-index: 10;
@@ -145,14 +142,13 @@
             padding: 0 20px;
         }
 
-        /* Binary Text Above Name */
         .binary-text {
             font-family: 'Courier New', monospace;
             font-size: 0.75rem;
             color: var(--neon-cyan);
             opacity: 0.4;
             letter-spacing: 3px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             animation: binaryPulse 3s ease-in-out infinite;
             text-align: center;
             max-width: 600px;
@@ -164,16 +160,15 @@
             50% { opacity: 0.6; }
         }
 
-        /* Name Styling with Glow */
         .name-container {
             text-align: center;
             margin-bottom: 15px;
         }
 
         .main-name {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             color: #fff;
             text-shadow: 
@@ -198,7 +193,6 @@
             }
         }
 
-        /* Title */
         .title {
             font-size: 1.1rem;
             font-weight: 400;
@@ -209,7 +203,6 @@
             opacity: 0.9;
         }
 
-        /* Contact Icons */
         .contact-icons {
             display: flex;
             gap: 30px;
@@ -238,9 +231,8 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
         }
 
-        /* View Projects Button */
         .projects-btn {
-            padding: 16px 40px;
+            padding: 18px 45px;
             border: 2px solid var(--neon-cyan);
             background: transparent;
             color: var(--neon-cyan);
@@ -277,7 +269,6 @@
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .navbar {
                 justify-content: center;
@@ -285,7 +276,7 @@
             }
 
             .nav-links {
-                gap: 25px;
+                gap: 20px;
             }
 
             .nav-links a {
@@ -295,6 +286,7 @@
             .binary-text {
                 font-size: 0.6rem;
                 letter-spacing: 2px;
+                margin-bottom: 20px;
             }
 
             .title {
@@ -304,61 +296,52 @@
 
             .contact-icons {
                 gap: 20px;
+                margin-bottom: 40px;
             }
 
-            .icon-link {
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
+            .projects-btn {
+                padding: 16px 35px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background -->
     <div class="bg-animation">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="grid-overlay"></div>
     </div>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="skills.html">Skills</a></li>
+            <li><a href="resume.html">Resume</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Binary Text -->
         <div class="binary-text" id="binaryText">
-            01001101 01000001 01010010 01000011 01011001 00100000 01000001 01001110 01000111 01000101 01001100 01001111
+            01001101 01000001 01010010 01000011 01011001 00100000 01000001 01001110 01000111 01000101 01001100 01001111 00100000 01001101 00101110 00100000 01010110 01001001 01001100 01001100 01000101 01000111 01000001 01010011
         </div>
 
-        <!-- Name -->
         <div class="name-container">
-            <h1 class="main-name">Marcy Angelo</h1>
+            <h1 class="main-name">Marcy Angelo M. Villegas</h1>
         </div>
 
-        <!-- Title -->
         <p class="title">Frontend Developer</p>
 
-        <!-- Contact Icons -->
         <div class="contact-icons">
             <a href="mailto:mmamvillegas@tip.edu.ph" class="icon-link" title="Email">✉</a>
             <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="icon-link" title="GitHub">⚡</a>
         </div>
 
-        <!-- View Projects Button -->
         <a href="about.html" class="projects-btn">View My Projects</a>
     </main>
 
     <script>
-        // Random binary animation
         const binaryText = document.getElementById('binaryText');
         const originalBinary = binaryText.textContent;
         
@@ -375,7 +358,6 @@
             }
             binaryText.textContent = newBinary;
             
-            // Reset after brief moment
             setTimeout(() => {
                 binaryText.textContent = originalBinary;
             }, 100);
