@@ -73,6 +73,12 @@
             padding: 0 50px;
             z-index: 1000;
             background: linear-gradient(to bottom, rgba(5, 5, 16, 0.95), transparent);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .nav-links {
@@ -125,6 +131,12 @@
         .page-header {
             margin-bottom: 50px;
             text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .page-title {
@@ -152,28 +164,51 @@
         .skill-category {
             background: var(--panel-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 35px;
+            animation: fadeInUp 0.8s ease;
             transition: all 0.3s ease;
         }
 
+        .skill-category:nth-child(1) { animation-delay: 0.1s; }
+        .skill-category:nth-child(2) { animation-delay: 0.2s; }
+        .skill-category:nth-child(3) { animation-delay: 0.3s; }
+
         .skill-category:hover {
             border-color: rgba(0, 212, 255, 0.4);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover .category-icon {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            transform: rotate(5deg);
         }
 
         .category-title {
             font-size: 1.2rem;
             color: var(--neon-cyan);
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .category-title::before {
-            content: '◆';
-            color: var(--neon-gold);
         }
 
         .skill-list {
@@ -186,17 +221,31 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 15px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
 
-        .skill-item:last-child {
-            border-bottom: none;
+        .skill-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .skill-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .skill-icon {
+            font-size: 1.3rem;
         }
 
         .skill-name {
             color: var(--text-primary);
             font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .skill-level {
@@ -209,11 +258,16 @@
             height: 8px;
             border-radius: 50%;
             background: rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
         .level-dot.active {
             background: var(--neon-cyan);
             box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .skill-item:hover .level-dot.active {
+            transform: scale(1.2);
         }
 
         .back-btn {
@@ -286,10 +340,16 @@
 
         <div class="skills-container">
             <div class="skill-category">
-                <h2 class="category-title">Core Technologies</h2>
+                <div class="category-header">
+                    <div class="category-icon">💻</div>
+                    <h2 class="category-title">Core Technologies</h2>
+                </div>
                 <div class="skill-list">
                     <div class="skill-item">
-                        <span class="skill-name">HTML5</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">🌐</span>
+                            <span class="skill-name">HTML5</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -299,7 +359,10 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">CSS3</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">🎨</span>
+                            <span class="skill-name">CSS3</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -309,7 +372,10 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">JavaScript</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">⚡</span>
+                            <span class="skill-name">JavaScript</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -322,10 +388,16 @@
             </div>
 
             <div class="skill-category">
-                <h2 class="category-title">Design & Development</h2>
+                <div class="category-header">
+                    <div class="category-icon">🎨</div>
+                    <h2 class="category-title">Design & Development</h2>
+                </div>
                 <div class="skill-list">
                     <div class="skill-item">
-                        <span class="skill-name">Responsive Web Design</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">📱</span>
+                            <span class="skill-name">Responsive Web Design</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -335,7 +407,10 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">Basic UI/UX Principles</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">✨</span>
+                            <span class="skill-name">CSS Animations</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -345,7 +420,10 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">CSS Animations</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">🎯</span>
+                            <span class="skill-name">Basic UI/UX Principles</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -358,10 +436,16 @@
             </div>
 
             <div class="skill-category">
-                <h2 class="category-title">Professional Skills</h2>
+                <div class="category-header">
+                    <div class="category-icon">🧠</div>
+                    <h2 class="category-title">Professional Skills</h2>
+                </div>
                 <div class="skill-list">
                     <div class="skill-item">
-                        <span class="skill-name">Problem-Solving</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">🔍</span>
+                            <span class="skill-name">Problem-Solving</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -371,7 +455,10 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">Critical Thinking</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">💡</span>
+                            <span class="skill-name">Critical Thinking</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
@@ -381,7 +468,10 @@
                         </div>
                     </div>
                     <div class="skill-item">
-                        <span class="skill-name">Continuous Learning</span>
+                        <div class="skill-info">
+                            <span class="skill-icon">📚</span>
+                            <span class="skill-name">Continuous Learning</span>
+                        </div>
                         <div class="skill-level">
                             <span class="level-dot active"></span>
                             <span class="level-dot active"></span>
