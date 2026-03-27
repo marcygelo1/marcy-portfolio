@@ -15,7 +15,7 @@
             --neon-cyan: #00d4ff;
             --neon-gold: #ffd700;
             --dark-bg: #050510;
-            --panel-bg: rgba(10, 15, 30, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.03);
             --text-primary: #e0e0e0;
             --text-secondary: #8899a6;
         }
@@ -35,7 +35,7 @@
         }
 
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
@@ -43,12 +43,8 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--neon-cyan);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--neon-gold);
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-gold));
+            border-radius: 5px;
         }
 
         .bg-animation {
@@ -64,8 +60,8 @@
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.2;
+            filter: blur(120px);
+            opacity: 0.3;
         }
 
         .orb-1 {
@@ -89,7 +85,9 @@
             padding: 0 60px;
             z-index: 1000;
             background: linear-gradient(to bottom, rgba(5, 5, 16, 0.95), transparent);
+            backdrop-filter: blur(10px);
             animation: slideDown 0.6s ease;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
         }
 
         @keyframes slideDown {
@@ -112,12 +110,13 @@
             text-transform: uppercase;
             transition: all 0.3s ease;
             position: relative;
-            padding: 5px 0;
+            padding: 8px 0;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
             color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
 
         .nav-links a::after {
@@ -127,7 +126,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--neon-cyan);
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold));
             transition: width 0.3s ease;
         }
 
@@ -140,7 +139,7 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 140px 60px 100px;
         }
@@ -154,22 +153,23 @@
             font-size: 0.95rem;
             margin-bottom: 40px;
             transition: all 0.3s ease;
+            padding: 10px 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
         }
 
         .back-btn:hover {
             color: var(--neon-gold);
+            border-color: var(--neon-gold);
             transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
         }
 
         .page-header {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             text-align: center;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .page-title {
@@ -179,6 +179,20 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold));
+            border-radius: 2px;
         }
 
         .page-subtitle {
@@ -186,123 +200,148 @@
             font-size: 1.1rem;
             letter-spacing: 3px;
             text-transform: uppercase;
+            margin-top: 30px;
         }
 
-        .contact-container {
+        /* Contact Cards */
+        .contact-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
 
         .contact-card {
-            background: var(--panel-bg);
+            background: var(--glass-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 40px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             color: inherit;
             display: block;
-            animation: fadeInUp 0.8s ease;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .contact-card:nth-child(1) { animation-delay: 0.1s; }
-        .contact-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .contact-card:hover {
             border-color: var(--neon-cyan);
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.2);
         }
 
         .contact-icon-large {
-            width: 70px;
-            height: 70px;
-            border: 2px solid var(--neon-cyan);
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--neon-cyan);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             color: var(--neon-cyan);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            background: rgba(0, 212, 255, 0.1);
         }
 
         .contact-card:hover .contact-icon-large {
             background: var(--neon-cyan);
             color: var(--dark-bg);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
             transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
         }
 
         .contact-method {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--neon-gold);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         .contact-detail {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 1rem;
             word-break: break-all;
+            line-height: 1.6;
         }
 
-        .message-section {
-            background: var(--panel-bg);
+        /* Contact Form */
+        .form-section {
+            background: var(--glass-bg);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            animation: fadeInUp 0.8s ease 0.3s both;
-            transition: all 0.3s ease;
+            border-radius: 30px;
+            padding: 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
-        .message-section:hover {
+        .form-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-section:hover {
             border-color: rgba(0, 212, 255, 0.4);
         }
 
-        .section-title {
-            font-size: 1.3rem;
+        .form-title {
+            font-size: 1.5rem;
             color: var(--neon-cyan);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        .section-title::before {
-            content: '✉';
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
         }
 
         .form-group {
             margin-bottom: 25px;
         }
 
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
         .form-label {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 500;
         }
 
         .form-input,
         .form-textarea {
             width: 100%;
-            padding: 15px 20px;
+            padding: 18px 22px;
             background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 14px;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-family: inherit;
             transition: all 0.3s ease;
         }
@@ -311,45 +350,64 @@
         .form-textarea:focus {
             outline: none;
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+            background: rgba(0, 212, 255, 0.08);
         }
 
         .form-textarea {
-            min-height: 150px;
+            min-height: 160px;
             resize: vertical;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 18px;
-            background: transparent;
-            border: 2px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-gold));
+            border: none;
+            color: var(--dark-bg);
+            font-size: 1.1rem;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 10px;
+            transition: all 0.4s ease;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
         }
 
         .submit-btn:hover {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
         }
 
         .footer {
             width: 100%;
-            padding: 50px;
+            padding: 60px 40px;
             text-align: center;
             border-top: 1px solid rgba(0, 212, 255, 0.1);
+            background: rgba(5, 5, 16, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         .footer-text {
@@ -377,16 +435,17 @@
                 font-size: 2rem;
             }
 
-            .contact-container {
+            .form-section {
+                padding: 35px 25px;
+            }
+
+            .form-row {
                 grid-template-columns: 1fr;
+                gap: 0;
             }
 
-            .contact-card {
-                padding: 30px;
-            }
-
-            .message-section {
-                padding: 25px;
+            .contact-cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -401,7 +460,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="skills.html">Skills</a></li>
-            <li><a href="resume.html">Resume</a></li>
+            <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
     </nav>
@@ -414,7 +473,7 @@
             <p class="page-subtitle">Let's Work Together</p>
         </div>
 
-        <div class="contact-container">
+        <div class="contact-cards">
             <a href="mailto:mmamvillegas@tip.edu.ph" class="contact-card">
                 <div class="contact-icon-large">✉</div>
                 <h2 class="contact-method">Email</h2>
@@ -426,32 +485,91 @@
                 <h2 class="contact-method">GitHub</h2>
                 <p class="contact-detail">github.com/marcygelo1/portfolio</p>
             </a>
+
+            <a href="#" class="contact-card" onclick="alert('LinkedIn profile coming soon!'); return false;">
+                <div class="contact-icon-large">💼</div>
+                <h2 class="contact-method">LinkedIn</h2>
+                <p class="contact-detail">Connect with me</p>
+            </a>
         </div>
 
-        <div class="message-section">
-            <h2 class="section-title">Send a Message</h2>
-            <form onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.');">
-                <div class="form-group">
-                    <label class="form-label">👤 Your Name</label>
-                    <input type="text" class="form-input" placeholder="Enter your name" required>
+        <div class="form-section" id="contactForm">
+            <h2 class="form-title">
+                <span>✉</span> Send Me a Message
+            </h2>
+            <form onsubmit="event.preventDefault(); handleSubmit();">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">👤 Your Name</label>
+                        <input type="text" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">✉ Your Email</label>
+                        <input type="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">✉ Your Email</label>
-                    <input type="email" class="form-input" placeholder="Enter your email" required>
+                <div class="form-group full-width">
+                    <label class="form-label">📋 Subject</label>
+                    <input type="text" class="form-input" placeholder="Project Collaboration" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group full-width">
                     <label class="form-label">💬 Message</label>
-                    <textarea class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+                    <textarea class="form-textarea" placeholder="Tell me about your project, ideas, or just say hello..." required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">
-                    Send Message →
+                    Send Message 🚀
                 </button>
             </form>
         </div>
     </main>
 
     <footer class="footer">
-        <p class="footer-text">© 2024 Marcy Angelo M. Villegas. All Rights Reserved.</p>
+        <p class="footer-text">© 2026 Marcy Angelo M. Villegas. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.contact-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        observer.observe(document.getElementById('contactForm'));
+
+        // Form submission handler
+        function handleSubmit() {
+            const btn = document.querySelector('.submit-btn');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = 'Sending... ⏳';
+            btn.style.opacity = '0.8';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Message Sent! ✓';
+                btn.style.background = 'linear-gradient(135deg, #00ff88, #00d4ff)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.style.opacity = '1';
+                    document.querySelector('form').reset();
+                    alert('Thank you for your message! I will get back to you soon.');
+                }, 1500);
+            }, 1500);
+        }
+    </script>
 </body>
 </html>
