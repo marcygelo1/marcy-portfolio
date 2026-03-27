@@ -15,7 +15,6 @@
             --neon-cyan: #00d4ff;
             --neon-gold: #ffd700;
             --dark-bg: #050510;
-            --panel-bg: rgba(10, 15, 30, 0.7);
             --glass-bg: rgba(255, 255, 255, 0.03);
             --text-primary: #e0e0e0;
             --text-secondary: #8899a6;
@@ -47,10 +46,6 @@
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, var(--neon-cyan), var(--neon-gold));
             border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, var(--neon-gold), var(--neon-cyan));
         }
 
         /* Background Animation */
@@ -197,20 +192,33 @@
             padding: 120px 40px 80px;
         }
 
-        .binary-text {
+        /* Rotating Titles - TYPEWRITER EFFECT */
+        .rotating-titles {
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: var(--neon-cyan);
-            opacity: 0.6;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             margin-bottom: 40px;
-            animation: binaryPulse 3s ease-in-out infinite;
             text-align: center;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
-        @keyframes binaryPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
+        .rotating-titles .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 20px;
+            background: var(--neon-cyan);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .name-container {
@@ -329,37 +337,6 @@
             color: var(--dark-bg);
             box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
             transform: translateY(-3px);
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        .scroll-arrow {
-            width: 30px;
-            height: 30px;
-            border-right: 2px solid var(--neon-cyan);
-            border-bottom: 2px solid var(--neon-cyan);
-            transform: rotate(45deg);
         }
 
         /* Preview Section */
@@ -519,17 +496,12 @@
                 gap: 25px;
             }
 
-            .nav-links a {
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-            }
-
             .hero-section {
                 padding: 100px 20px 60px;
             }
 
-            .binary-text {
-                font-size: 0.7rem;
+            .rotating-titles {
+                font-size: 0.9rem;
                 letter-spacing: 2px;
             }
 
@@ -587,13 +559,13 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="binary-text" id="binaryText">
-            01001101 01000001 01010010 01000011 01011001 00100000 01000001 01001110 01000111 01000101 01001100 01001111
+        <div class="rotating-titles" id="rotatingTitles">
+            FRONTEND DEVELOPER<span class="cursor"></span>
         </div>
 
         <div class="name-container">
             <h1 class="main-name">Marcy Angelo M. Villegas</h1>
-            <p class="title">Frontend Developer</p>
+            <p class="title">Creative Technologist</p>
         </div>
 
         <div class="contact-icons">
@@ -605,11 +577,6 @@
         <a href="projects.html" class="projects-btn">
             View My Projects →
         </a>
-
-        <div class="scroll-indicator" onclick="document.getElementById('preview').scrollIntoView({behavior: 'smooth'})">
-            <span>SCROLL</span>
-            <div class="scroll-arrow"></div>
-        </div>
     </section>
 
     <!-- Preview Section -->
@@ -648,27 +615,48 @@
     </footer>
 
     <script>
-        // Binary text animation
-        const binaryText = document.getElementById('binaryText');
-        const originalBinary = binaryText.textContent;
+        // Rotating titles with typewriter effect
+        const titles = [
+            "FRONTEND DEVELOPER",
+            "UI/UX DESIGNER",
+            "COMPUTER ENGINEER",
+            "WEB DEVELOPER",
+            "CREATIVE TECHNOLOGIST",
+            "TECH ENTHUSIAST"
+        ];
         
-        setInterval(() => {
-            let newBinary = '';
-            for (let i = 0; i < originalBinary.length; i++) {
-                if (originalBinary[i] === ' ') {
-                    newBinary += ' ';
-                } else if (Math.random() > 0.9) {
-                    newBinary += Math.random() > 0.5 ? '0' : '1';
-                } else {
-                    newBinary += originalBinary[i];
-                }
-            }
-            binaryText.textContent = newBinary;
+        let currentTitle = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        const titleElement = document.getElementById('rotatingTitles');
+        
+        function typeEffect() {
+            const currentText = titles[currentTitle];
             
-            setTimeout(() => {
-                binaryText.textContent = originalBinary;
-            }, 100);
-        }, 3000);
+            if (isDeleting) {
+                titleElement.innerHTML = currentText.substring(0, currentChar - 1) + '<span class="cursor"></span>';
+                currentChar--;
+            } else {
+                titleElement.innerHTML = currentText.substring(0, currentChar + 1) + '<span class="cursor"></span>';
+                currentChar++;
+            }
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && currentChar === currentText.length) {
+                typeSpeed = 2000; // Wait at end
+                isDeleting = true;
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentTitle = (currentTitle + 1) % titles.length;
+                typeSpeed = 500; // Wait before typing next
+            }
+            
+            setTimeout(typeEffect, typeSpeed);
+        }
+        
+        // Start the typing effect
+        setTimeout(typeEffect, 1000);
 
         // Scroll animation observer
         const observerOptions = {
