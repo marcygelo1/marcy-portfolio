@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Marcy Angelo M. Villegas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-cyan: #00d4ff;
+            --neon-gold: #ffd700;
+            --dark-bg: #050510;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --text-primary: #e0e0e0;
+            --text-secondary: #8899a6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-gold));
+            border-radius: 5px;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--neon-cyan);
+            top: 10%;
+            left: -300px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--neon-gold);
+            bottom: 10%;
+            right: -200px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 60px;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(5, 5, 16, 0.95), transparent);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.6s ease;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 60px 100px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            color: var(--neon-gold);
+            border-color: var(--neon-gold);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .page-header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold));
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 30px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 30px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 30px 60px rgba(0, 212, 255, 0.2),
+                inset 0 0 20px rgba(0, 212, 255, 0.05);
+        }
+
+        .project-image-wrapper {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 215, 0, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 212, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .project-icon-large {
+            font-size: 5rem;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-icon-large {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+        }
+
+        .project-content {
+            padding: 35px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: var(--neon-gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .tech-tag {
+            padding: 8px 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tech-tag:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-btn {
+            flex: 1;
+            padding: 14px 20px;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .project-btn:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .project-btn.secondary {
+            border-color: var(--neon-gold);
+            color: var(--neon-gold);
+        }
+
+        .project-btn.secondary:hover {
+            background: var(--neon-gold);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer {
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            background: rgba(5, 5, 16, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: center;
+                padding: 0 20px;
+                height: 70px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .main-content {
+                padding: 120px 25px 80px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                margin: 0 10px;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .stat-card {
+                padding: 25px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        
+        <div class="page-header">
+            <h1 class="page-title">My Projects</h1>
+            <p class="page-subtitle">Showcase of My Work</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <span class="project-icon-large">💻</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Cyberpunk Portfolio</h3>
+                    <p class="project-desc">Interactive portfolio with dynamic animations, binary effects, glowing elements, and modern glassmorphism design. Features smooth scroll animations and responsive layout.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Glassmorphism</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-btn" onclick="alert('Demo coming soon!'); return false;">Live Demo ↗</a>
+                        <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="project-btn secondary">GitHub 🐙</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <span class="project-icon-large">📱</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Responsive Web Design</h3>
+                    <p class="project-desc">Mobile-first approach with smooth transitions, modern UI patterns, and cross-device compatibility. Includes custom navigation and animated components.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">CSS Grid</span>
+                        <span class="tech-tag">Flexbox</span>
+                        <span class="tech-tag">Media Queries</span>
+                        <span class="tech-tag">Animations</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-btn" onclick="alert('Demo coming soon!'); return false;">Live Demo ↗</a>
+                        <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="project-btn secondary">GitHub 🐙</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <span class="project-icon-large">🎨</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">UI/UX Components</h3>
+                    <p class="project-desc">Custom navigation, animated buttons, interactive elements, and accessibility-focused design. Features glassmorphism effects and hover animations.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">UI Design</span>
+                        <span class="tech-tag">Animations</span>
+                        <span class="tech-tag">Accessibility</span>
+                        <span class="tech-tag">Modern CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-btn" onclick="alert('Demo coming soon!'); return false;">Live Demo ↗</a>
+                        <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="project-btn secondary">GitHub 🐙</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <span class="project-icon-large">🌐</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Network Dashboard</h3>
+                    <p class="project-desc">Interactive dashboard displaying network statistics with real-time data visualization. Built with modern web technologies and cyberpunk aesthetics.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS Animations</span>
+                        <span class="tech-tag">Networking</span>
+                        <span class="tech-tag">UI Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-btn" onclick="alert('Demo coming soon!'); return false;">Live Demo ↗</a>
+                        <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="project-btn secondary">GitHub 🐙</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <span class="project-icon-large">🔒</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Security Interface</h3>
+                    <p class="project-desc">Cybersecurity-themed interface with authentication flows, security status indicators, and modern glassmorphism design elements.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Security</span>
+                        <span class="tech-tag">Glassmorphism</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-btn" onclick="alert('Demo coming soon!'); return false;">Live Demo ↗</a>
+                        <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="project-btn secondary">GitHub 🐙</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <span class="project-icon-large">⚡</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Animated Landing Page</h3>
+                    <p class="project-desc">High-performance landing page with smooth scroll animations, gradient effects, and interactive elements. Optimized for all devices.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Animations</span>
+                        <span class="tech-tag">Responsive</span>
+                        <span class="tech-tag">Performance</span>
+                        <span class="tech-tag">Modern UI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-btn" onclick="alert('Demo coming soon!'); return false;">Live Demo ↗</a>
+                        <a href="https://github.com/marcygelo1/portfolio" target="_blank" class="project-btn secondary">GitHub 🐙</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">6+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Certifications</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Commitment</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-text">© 2026 Marcy Angelo M. Villegas. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        document.querySelectorAll('.stat-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
