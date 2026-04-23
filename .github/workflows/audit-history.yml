@@ -1,35 +1,37 @@
 name: View All History
 
 on:
-  workflow_dispatch:  # Manual trigger only
+  workflow_dispatch:
 
 jobs:
   show-history:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      - name: Complete Project History
+      - name: Show Project History
         run: |
           echo "=========================================="
-          echo "   ALL CHANGES IN YOUR PORTFOLIO"
+          echo "ALL CHANGES IN YOUR PORTFOLIO"
           echo "=========================================="
           echo ""
-          echo "Total commits: $(git rev-list --count HEAD)"
+          echo "Total commits:"
+          git rev-list --count HEAD
           echo ""
-          echo "FULL HISTORY:"
-          git log --all --graph --decorate --oneline
+          echo "Recent commits:"
+          git log --oneline -10
           echo ""
-          echo "LAST EDITOR PER FILE:"
-          git ls-files | while read file; do
-            last_editor=$(git log -1 --format='%an (%ad)' --date=short -- "$file" 2>/dev/null || echo "Unknown")
-            echo "  $file -> $last_editor"
+          echo "Last editor per file:"
+          git ls-files | head -20 | while read file; do
+            editor=$(git log -1 --format="%an (%ad)" --date=short -- "$file")
+            echo "$file -> $editor"
           done
           echo ""
-          echo "FILES CHANGED IN LAST PUSH:"
-          git diff --name-only HEAD~1 HEAD || echo "First commit - nothing to compare"
+          echo "Files changed in last push:"
+          git diff --name-only HEAD~1 HEAD || echo "First commit"
           echo ""
-          echo "LAST 5 COMMITS (DETAILED):"
+          echo "Last 5 commits detailed:"
           git log -5 --format="%h | %an | %s | %ad" --date=short
