@@ -1,54 +1,46 @@
-name: Portfolio Deploy with Full History
+name: build-and-deploy
+
+# Add these permissions at the workflow level
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]  # or master, depending on your default branch
   pull_request:
     branches: [ main ]
 
 jobs:
-  build-and-log:
+  build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
-      # 1. Checkout code with full history
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0  # Gets ALL commit history
-      
-      # 2. Show who made changes
-      - name: Show Commit History
-        run: |
-          echo "=== LAHAT NG NAGAWA MO ==="
-          echo ""
-          echo "Recent commits:"
-          git log --oneline -10
-          echo ""
-          echo "Kung sino ang nag-commit:"
-          git log --format="%h | %an | %s | %ad" --date=short -10
-          echo ""
-          echo "Files na binago:"
-          git diff --name-only HEAD~1 HEAD
-      
-      # 3. Show file changes summary
-      - name: Show What Changed
-        run: |
-          echo "=== MGA BINAGONG FILES ==="
-          git diff --stat HEAD~1 HEAD || echo "First commit - no previous to compare"
-      
-      # 4. Build site
-      - name: Build Site
-        run: |
-          echo "Building portfolio..."
-          ls -la
-          echo "Files ready for deployment:"
-          find . -type f | grep -v ".git" | head -20
-      
-      # 5. Deploy to GitHub Pages
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+          node-version: '20'
+          
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+            
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run build  # or your build command
+        
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4  # Updated to v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./dist  # Change this to your build output folder (dist, build, etc.)
