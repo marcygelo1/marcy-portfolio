@@ -1,0 +1,54 @@
+name: Portfolio Deploy with Full History
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-log:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Checkout code with full history
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Gets ALL commit history
+      
+      # 2. Show who made changes
+      - name: Show Commit History
+        run: |
+          echo "=== LAHAT NG NAGAWA MO ==="
+          echo ""
+          echo "Recent commits:"
+          git log --oneline -10
+          echo ""
+          echo "Kung sino ang nag-commit:"
+          git log --format="%h | %an | %s | %ad" --date=short -10
+          echo ""
+          echo "Files na binago:"
+          git diff --name-only HEAD~1 HEAD
+      
+      # 3. Show file changes summary
+      - name: Show What Changed
+        run: |
+          echo "=== MGA BINAGONG FILES ==="
+          git diff --stat HEAD~1 HEAD || echo "First commit - no previous to compare"
+      
+      # 4. Build site
+      - name: Build Site
+        run: |
+          echo "Building portfolio..."
+          ls -la
+          echo "Files ready for deployment:"
+          find . -type f | grep -v ".git" | head -20
+      
+      # 5. Deploy to GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
